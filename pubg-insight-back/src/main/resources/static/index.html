@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Server Health Monitor</title>
+  <style>
+    body { font-family: monospace; background: #0b0b0b; color: #0f0; padding: 20px; }
+    h1 { color: #0f0; }
+    #log { border: 1px solid #333; padding: 10px; height: 400px; overflow-y: auto; background: #111; }
+    .ok { color: #0f0; }
+    .fail { color: #f33; }
+    .time { color: #888; }
+  </style>
+</head>
+<body>
+  <h1>Server Health Monitor (10s interval)</h1>
+  <div id="log"></div>
+
+  <script>
+    const log = document.getElementById('log');
+    function appendLog(msg, ok = true) {
+      const line = document.createElement('div');
+      const time = new Date().toLocaleTimeString();
+      line.innerHTML = `<span class="time">[${time}]</span> <span class="${ok ? 'ok':'fail'}">${msg}</span>`;
+      log.appendChild(line);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    async function checkHealth() {
+      try {
+        const r = await fetch('/healthcheck', { cache: 'no-store' });
+        if (!r.ok) throw new Error(r.status);
+        const t = await r.text();
+        appendLog('OK (' + t + ')', true);
+      } catch (e) {
+        appendLog('FAIL (' + e.message + ')', false);
+      }
+    }
+
+    checkHealth();                     // 첫 실행
+    setInterval(checkHealth, 10000);   // 10초마다 반복
+  </script>
+</body>
+</html>
