@@ -57,6 +57,10 @@ export default function MapPage() {
   useEffect(() => { centerRef.current = center; }, [center]);
   useEffect(() => { zoomRef.current = zoom; }, [zoom]);
   useEffect(() => { sizeRef.current = size; }, [size]);
+  // Active pointers and pinch session
+  const pointersRef = useRef<Map<number, { x: number; y: number }>>(new Map());
+  const pinchRef = useRef<{ d0: number; zoom0: number } | null>(null);
+  const capturedIdRef = useRef<number | null>(null);
 
   // Resize observer to track viewport
   useEffect(() => {
@@ -108,29 +112,123 @@ export default function MapPage() {
     let startCenter = { x: 0, y: 0 };
 
     const onPointerDown = (e: PointerEvent) => {
-      dragging = true;
-      start = { x: e.clientX, y: e.clientY };
-      startCenter = { ...centerRef.current };
-      // Ensure the container captures subsequent pointer events
-      (el as HTMLElement).setPointerCapture?.(e.pointerId);
-      (el as HTMLElement).style.cursor = "grabbing";
+      // Track pointer
+      pointersRef.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+
+      if (pointersRef.current.size === 1) {
+        // Start panning with a single pointer
+        dragging = true;
+        start = { x: e.clientX, y: e.clientY };
+        startCenter = { ...centerRef.current };
+        (el as HTMLElement).style.cursor = "grabbing";
+        // Capture only in single-pointer pan
+        (el as HTMLElement).setPointerCapture?.(e.pointerId);
+        capturedIdRef.current = e.pointerId;
+        pinchRef.current = null;
+      } else if (pointersRef.current.size === 2) {
+        // Start pinch
+        dragging = false;
+        // Release any previous capture to allow multi-touch to flow
+        if (capturedIdRef.current !== null) {
+          try {
+            (el as HTMLElement).releasePointerCapture?.(capturedIdRef.current);
+          } catch (err) {
+            void err; // ignore unsupported browsers
+          }
+          capturedIdRef.current = null;
+        }
+        const it = Array.from(pointersRef.current.values());
+        const dx = it[0].x - it[1].x;
+        const dy = it[0].y - it[1].y;
+        const d0 = Math.hypot(dx, dy) || 1;
+        pinchRef.current = { d0, zoom0: zoomRef.current };
+        (el as HTMLElement).style.cursor = "grab";
+      }
     };
     const onPointerMove = (e: PointerEvent) => {
-      if (!dragging) return;
-      const s = scaleRef.current;
-      const dx = (e.clientX - start.x) / s;
-      const dy = (e.clientY - start.y) / s;
-      const zNow = zRef.current;
-      const world = TILE * tilesPerSide(zNow);
-      const sizeNow = sizeRef.current;
-      const next = { x: startCenter.x - dx, y: startCenter.y - dy };
-      setCenter(clampCenterToViewport(next, world, s, sizeNow));
+      // Update tracked pointer position
+      if (pointersRef.current.has(e.pointerId)) {
+        pointersRef.current.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      }
+
+      // Pinch zoom when two pointers are active
+      if (pointersRef.current.size === 2 && pinchRef.current) {
+        const elRect = el.getBoundingClientRect();
+        const it = Array.from(pointersRef.current.values());
+        const midX = (it[0].x + it[1].x) / 2 - elRect.left;
+        const midY = (it[0].y + it[1].y) / 2 - elRect.top;
+        const dx = it[0].x - it[1].x;
+        const dy = it[0].y - it[1].y;
+        const d = Math.max(1, Math.hypot(dx, dy));
+        const { d0, zoom0 } = pinchRef.current;
+        const nextZoom = clamp(zoom0 + Math.log2(d / d0), Z_MIN, Z_MAX);
+
+        const scaleNow = scaleRef.current;
+        const sizeNow = sizeRef.current;
+        const centerNow = centerRef.current;
+        const left = centerNow.x - (sizeNow.w / 2) / scaleNow;
+        const top = centerNow.y - (sizeNow.h / 2) / scaleNow;
+        const wx = left + midX / scaleNow;
+        const wy = top + midY / scaleNow;
+
+        const zNowInt = zRef.current;
+        const zNextInt = clamp(Math.round(nextZoom), Z_MIN, Z_MAX);
+        const scaleNext = 2 ** (nextZoom - zNextInt);
+        const unitFactor = 2 ** (zNextInt - zNowInt);
+        const wxNext = wx * unitFactor;
+        const wyNext = wy * unitFactor;
+        const leftNext = wxNext - midX / scaleNext;
+        const topNext = wyNext - midY / scaleNext;
+        const cxNext = leftNext + (sizeNow.w / 2) / scaleNext;
+        const cyNext = topNext + (sizeNow.h / 2) / scaleNext;
+        const worldNext = TILE * tilesPerSide(zNextInt);
+        const clamped = clampCenterToViewport({ x: cxNext, y: cyNext }, worldNext, scaleNext, sizeNow);
+        setZoom(nextZoom);
+        setCenter(clamped);
+        return;
+      }
+
+      // Single-pointer pan
+      if (dragging) {
+        const s = scaleRef.current;
+        const dx = (e.clientX - start.x) / s;
+        const dy = (e.clientY - start.y) / s;
+        const zNow = zRef.current;
+        const world = TILE * tilesPerSide(zNow);
+        const sizeNow = sizeRef.current;
+        const next = { x: startCenter.x - dx, y: startCenter.y - dy };
+        setCenter(clampCenterToViewport(next, world, s, sizeNow));
+      }
     };
     const onPointerUp = (e: PointerEvent) => {
-      dragging = false;
       (e.currentTarget as Element | undefined)?.releasePointerCapture?.(e.pointerId);
-      (el as HTMLElement).style.cursor = "grab";
+      // Remove pointer
+      pointersRef.current.delete(e.pointerId);
+      if (capturedIdRef.current === e.pointerId) {
+        capturedIdRef.current = null;
+      }
+      pinchRef.current = null;
+
+      if (pointersRef.current.size === 1) {
+        // Continue panning with remaining pointer
+        const [remId, only] = Array.from(pointersRef.current.entries())[0];
+        dragging = true;
+        start = { x: only.x, y: only.y };
+        startCenter = { ...centerRef.current };
+        (el as HTMLElement).style.cursor = "grabbing";
+        // Re-capture remaining pointer for stable pan
+        try {
+          (el as HTMLElement).setPointerCapture?.(remId);
+          capturedIdRef.current = remId;
+        } catch (err) {
+          void err; // ignore unsupported browsers
+        }
+      } else {
+        dragging = false;
+        (el as HTMLElement).style.cursor = "grab";
+      }
     };
+    const onPointerCancel = onPointerUp;
     const onWheel = (e: WheelEvent) => {
       e.preventDefault();
       const delta = e.deltaY;
@@ -179,6 +277,7 @@ export default function MapPage() {
     el.addEventListener("pointerdown", onPointerDown);
     el.addEventListener("pointermove", onPointerMove);
     el.addEventListener("pointerup", onPointerUp);
+    el.addEventListener("pointercancel", onPointerCancel);
     el.addEventListener("pointerleave", onPointerUp);
     el.addEventListener("wheel", onWheel, { passive: false });
     return () => {
@@ -186,6 +285,7 @@ export default function MapPage() {
       el.removeEventListener("pointerdown", onPointerDown);
       el.removeEventListener("pointermove", onPointerMove);
       el.removeEventListener("pointerup", onPointerUp);
+      el.removeEventListener("pointercancel", onPointerCancel);
       el.removeEventListener("pointerleave", onPointerUp);
       el.removeEventListener("wheel", onWheel as EventListener);
     };
