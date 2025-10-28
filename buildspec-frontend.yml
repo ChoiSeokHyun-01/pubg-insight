@@ -10,17 +10,14 @@ phases:
   install:
     commands:
       - cd $FE_DIR
-      - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
-      - export NVM_DIR="$HOME/.nvm"
-      - . "$NVM_DIR/nvm.sh"
-      - nvm install 22
-      - nvm use 22
+      - curl -fsSL https://rpm.nodesource.com/setup_22.x | bash -
+      - yum install -y nodejs
       - node -v
       - npm -v
       - npm ci
 
   pre_build:
-    commands:
+    commands:1
       - cd $FE_DIR
       - export NVM_DIR="$HOME/.nvm"
       - . "$NVM_DIR/nvm.sh"
