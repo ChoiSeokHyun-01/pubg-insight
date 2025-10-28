@@ -1,43 +1,40 @@
 version: 0.2
+
 env:
   variables:
     FE_DIR: "pubg-insight-front"
     DIST_DIR: "pubg-insight-front/dist"
-    v: "pubginfohub-bukket"
+    HOSTING_BUCKET: "pubginfohub-bukket"
     CF_DISTRIBUTION_ID: "E2NQR3HITQJA37"
 
 phases:
   install:
     commands:
-      - cd $FE_DIR
+      - echo "== INSTALL =="
       - curl -fsSL https://rpm.nodesource.com/setup_22.x | bash -
       - yum install -y nodejs
       - node -v
       - npm -v
-      - npm ci
+      - npm ci --prefix $FE_DIR
 
   pre_build:
-    commands:1
-      - cd $FE_DIR
-      - export NVM_DIR="$HOME/.nvm"
-      - . "$NVM_DIR/nvm.sh"
-      - if [ -f ".env.production.template" ]; then cp .env.production.template .env.production; fi
+    commands:
+      - echo "== PRE_BUILD =="
+      - |
+        if [ -f "$FE_DIR/.env.production.template" ]; then
+          cp "$FE_DIR/.env.production.template" "$FE_DIR/.env.production"
+        fi
 
   build:
     commands:
-      - cd $FE_DIR
-      - export NVM_DIR="$HOME/.nvm"
-      - . "$NVM_DIR/nvm.sh"
-      - npm run build
+      - echo "== BUILD =="
+      - npm run build --prefix $FE_DIR
 
   post_build:
     commands:
-      - cd ..
+      - echo "== POST_BUILD =="
       - aws s3 sync $DIST_DIR s3://$HOSTING_BUCKET --delete
-      - |
-        if [ -n "$CF_DISTRIBUTION_ID" ]; then
-          aws cloudfront create-invalidation --distribution-id $CF_DISTRIBUTION_ID --paths "/*"
-        fi
+      - aws cloudfront create-invalidation --distribution-id $CF_DISTRIBUTION_ID --paths "/*"
 
 artifacts:
   files:
