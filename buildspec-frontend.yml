@@ -1,0 +1,50 @@
+version: 0.2
+env:
+  variables:
+    FE_DIR: "pubg-insight-front"
+    DIST_DIR: "pubg-insight-front/dist"
+    v: "pubginfohub-bukket"
+    CF_DISTRIBUTION_ID: "E2NQR3HITQJA37"
+
+phases:
+  install:
+    commands:
+      - cd $FE_DIR
+      - curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+      - export NVM_DIR="$HOME/.nvm"
+      - . "$NVM_DIR/nvm.sh"
+      - nvm install 22
+      - nvm use 22
+      - node -v
+      - npm -v
+      - npm ci
+
+  pre_build:
+    commands:
+      - cd $FE_DIR
+      - export NVM_DIR="$HOME/.nvm"
+      - . "$NVM_DIR/nvm.sh"
+      - if [ -f ".env.production.template" ]; then cp .env.production.template .env.production; fi
+
+  build:
+    commands:
+      - cd $FE_DIR
+      - export NVM_DIR="$HOME/.nvm"
+      - . "$NVM_DIR/nvm.sh"
+      - npm run build
+
+  post_build:
+    commands:
+      - cd ..
+      - aws s3 sync $DIST_DIR s3://$HOSTING_BUCKET --delete
+      - |
+        if [ -n "$CF_DISTRIBUTION_ID" ]; then
+          aws cloudfront create-invalidation --distribution-id $CF_DISTRIBUTION_ID --paths "/*"
+        fi
+
+artifacts:
+  files:
+    - pubg-insight-front/dist/**/*
+cache:
+  paths:
+    - pubg-insight-front/node_modules/**/*
