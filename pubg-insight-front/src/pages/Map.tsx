@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import "../styles/map.css";
 
 // Simple URL helpers (no react-router-dom dependency)
 function useLocationParams() {
@@ -18,8 +19,8 @@ function useLocationParams() {
 }
 
 const TILE = 256; // 256x256 tiles
-const Z_MIN = 0;
-const Z_MAX = 7;
+const Z_MIN = 1;
+const Z_MAX = 6;
 
 const clamp = (v: number, lo: number, hi: number) => Math.max(lo, Math.min(hi, v));
 
@@ -307,16 +308,7 @@ export default function MapPage() {
   return (
     <div
       ref={containerRef}
-      style={{
-        position: "relative",
-        width: "100%",
-        height: "100dvh",
-        overflow: "hidden",
-        background: "#000",
-        touchAction: "none",
-        cursor: "grab",
-        userSelect: "none",
-      }}
+      className="map-container"
       onMouseDown={(e) => e.preventDefault()}
       onDragStart={(e) => e.preventDefault()}
     >
@@ -330,45 +322,18 @@ export default function MapPage() {
           return (
             <div
               key={key}
-              style={{
-                position: "absolute",
-                left,
-                top,
-                width: sizePx,
-                height: sizePx,
-                overflow: "hidden",
-              }}
+              className="map-tile"
+              style={{ left, top, width: sizePx, height: sizePx }}
             >
               {hasFailed ? (
-                <div
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    color: "#888",
-                    background: "#111",
-                    border: "1px dashed #333",
-                    fontSize: 12,
-                    userSelect: "none",
-                    pointerEvents: "none",
-                  }}
-                >
+                <div className="map-tile-failed">
                   {x},{y}
                 </div>
               ) : (
                 <img
                   src={tileUrl(name, z, x, y)}
                   alt=""
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    imageRendering: "auto",
-                    userSelect: "none",
-                    pointerEvents: "none",
-                    display: "block",
-                  }}
+                  className="map-tile-img"
                   loading="lazy"
                   draggable={false}
                   onError={() => setFailed((prev) => ({ ...prev, [key]: true }))}

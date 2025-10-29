@@ -7,6 +7,9 @@ try:
 except ImportError as e:
     raise SystemExit("Pillow is required. Install with: pip install -r pubg-insight-tools/upscale/requirements.txt") from e
 
+# python pubg-insight-tools/upscale/cli.py -h
+# python pubg-insight-tools/upscale/cli.py "<입력이미지 경로>" "<출력폴더 경로>" [옵션]
+
 
 Z_LEVELS = [
     (1, 512),
