@@ -35,14 +35,19 @@ public class PubgSeasonRepository implements SeasonRepository {
                 .uri("/seasons")
                 .retrieve()
                 .onStatus(HttpStatusCode::isError, r ->
-                        r.bodyToMono(String.class).map(msg -> new IllegalStateException("PUBG error " + r.statusCode() + ": " + msg)))
+                        r.bodyToMono(String.class)
+                                .map(msg -> new IllegalStateException("PUBG error " + r.statusCode() + ": " + msg)))
                 .bodyToMono(PubgSeasonResponse.class)
                 .block();
 
         if (response == null || response.data() == null) return List.of();
 
-        return response.data().stream()
-                .map(d -> new Season(d.id(), d.attributes().isCurrent(), d.attributes().isOffseason()))
+        return response.data()
+                .stream()
+                .map(d -> new Season(
+                        d.id(),
+                        d.attributes().isCurrent(),
+                        d.attributes().isOffseason()))
                 .toList();
     }
 
@@ -56,6 +61,4 @@ public class PubgSeasonRepository implements SeasonRepository {
                 @JsonProperty("isOffseason") boolean isOffseason) {
         }
     }
-
-
 }

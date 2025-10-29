@@ -18,9 +18,11 @@ public class SeasonController {
     @GetMapping
     public List<SeasonResponse> fetchAll(
             @RequestParam String platform,
-            @RequestParam(defaultValue="false") boolean refresh) {
+            @RequestParam(defaultValue = "false") boolean refresh) {
 
         if (refresh) seasonService.syncFromApi(platform);
-        return SeasonMapper.toSeasonResponse(seasonService.fetchAll(platform));
+        List<Season> seasons = seasonService.fetchAll(platform);
+
+        return SeasonMapper.toSeasonResponse(seasons);
     }
 }

@@ -21,7 +21,10 @@ public class SeasonService {
             unless = "#result == null || #result.isEmpty()")
     public List<Season> fetchAll(String platform) {
         var platformLower = platform.toLowerCase();
-        return seasonJpaRepository.findAllByPlatform(platformLower).stream().map(SeasonMapper::toDomain).toList();
+        return seasonJpaRepository.findAllByPlatform(platformLower)
+                .stream()
+                .map(SeasonMapper::toDomain)
+                .toList();
     }
 
     @Transactional
@@ -30,7 +33,10 @@ public class SeasonService {
         var p = platform.toLowerCase();
         var api = seasonRepository.fetchAll(p);
         seasonJpaRepository.deleteByPlatform(p);
-        var entities = api.stream().map(s -> SeasonMapper.toEntity(s, p)).toList();
+        var entities = api
+                .stream()
+                .map(s -> SeasonMapper.toEntity(s, p))
+                .toList();
         seasonJpaRepository.saveAll(entities);
     }
 }

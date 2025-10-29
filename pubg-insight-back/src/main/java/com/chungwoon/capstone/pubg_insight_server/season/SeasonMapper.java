@@ -16,7 +16,8 @@ public final class SeasonMapper {
 
     // 여러 Season -> SeasonResponse 리스트 변환
     public static List<SeasonResponse> toSeasonResponse(List<Season> seasonList) {
-        return seasonList.stream()
+        return seasonList
+                .stream()
                 .map(SeasonMapper::toSeasonResponse)
                 .toList();
     }
