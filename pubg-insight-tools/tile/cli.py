@@ -8,7 +8,7 @@ try:
 except ImportError as e:
     raise SystemExit("Pillow is required. Install with: pip install -r pubg-insight-tools/upscale/requirements.txt") from e
 
-# python pubg-insight-tools/tile/cli.py "C:\WS\map\out\erangel" "C:\WS\map\tile\erangel"
+# python pubg-insight-tools/tile/cli.py "C:\WS\map\out\erangel" "C:\WS\map\map\erangel"
 
 # Allow very large images (e.g., 16384x16384) without Pillow raising DecompressionBombError
 Image.MAX_IMAGE_PIXELS = None
