@@ -33,7 +33,7 @@ phases:
   post_build:
     commands:
       - echo "== POST_BUILD =="
-      - aws s3 sync $DIST_DIR s3://$HOSTING_BUCKET --delete -- exclude "map/*"
+      - aws s3 sync $DIST_DIR s3://$HOSTING_BUCKET --delete --exclude "map/*"
       - aws cloudfront create-invalidation --distribution-id $CF_DISTRIBUTION_ID --paths "/*"
 
 artifacts:
