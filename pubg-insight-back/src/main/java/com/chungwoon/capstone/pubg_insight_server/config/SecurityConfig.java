@@ -21,6 +21,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
+
+                // h2-console 접근 허용을 위한 설정 배포 시 없애기 !
+                .headers(h->h.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+
                 .cors(Customizer.withDefaults())
                 .httpBasic(b -> b.disable())
                 .formLogin(f -> f.disable())
@@ -28,6 +32,10 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/", "/healthcheck", "index.html").permitAll()
                         .requestMatchers("/api/**").permitAll()
+
+                        // h2-console 접근 허용을 위한 설정 배포 시 없애기 !
+                        .requestMatchers("/h2-console/**").permitAll()
+
                         .anyRequest().authenticated()
                 );
         return http.build();
