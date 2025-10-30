@@ -37,3 +37,133 @@
   display: block;
 }
 
+.map-pin-layer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.map-pin {
+  position: absolute;
+  border-radius: 6px;
+  border: 1px solid rgba(0, 0, 0, 0.35);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
+  pointer-events: auto;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  backdrop-filter: blur(2px);
+}
+
+.map-pin-label {
+  position: absolute;
+  min-width: 80px;
+  margin-top: 2px;
+  padding: 2px 4px;
+  background: rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  white-space: nowrap;
+  transform: translate(-50%, 6px);
+  left: 50%;
+  bottom: -20px;
+  pointer-events: none;
+}
+
+.map-type-filter {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  width: 220px;
+  max-height: 60%;
+  overflow-y: auto;
+  background: rgba(8, 8, 12, 0.86);
+  border-radius: 12px;
+  padding: 12px 14px;
+  color: #f7f7f7;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: 0 16px 30px rgba(0, 0, 0, 0.45);
+  pointer-events: auto;
+}
+
+.map-type-filter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.map-type-filter-title {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.map-type-filter-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.map-type-filter-actions button {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: #f1f1f1;
+  border-radius: 6px;
+  padding: 2px 8px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.map-type-filter-actions button:hover {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.map-type-filter-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.map-type-filter-item {
+  display: grid;
+  grid-template-columns: auto 16px 1fr auto;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.map-type-filter-item input {
+  cursor: pointer;
+}
+
+.map-type-filter-color {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.map-type-filter-label {
+  color: #f7f7f7;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.map-type-filter-count {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.6);
+}
+

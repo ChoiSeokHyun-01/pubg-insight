@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./styles/App.css";
 import HealthCheck from "./pages/HealthCheck";
-import MapPage from "./pages/Map";
+import MapPage from "./pages/map";
 import Home from "./pages/Home";
 
 export default function App() {
