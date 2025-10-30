@@ -9,6 +9,8 @@ env:
 
 phases:
   install:
+    runtime-versions:
+      nodejs: 22
     commands:
       - echo "== INSTALL =="
       - curl -fsSL https://rpm.nodesource.com/setup_22.x | bash -
