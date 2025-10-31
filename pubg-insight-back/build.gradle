@@ -42,6 +42,10 @@ dependencies {
 	// 롬복
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
+
+	// 스웨거
+	implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.13'
+	implementation 'org.apache.commons:commons-lang3:3.18.0' // 3.17.0을 쓰면 스웨거에서 취약점 문제 발생
 }
 
 tasks.named('test') {

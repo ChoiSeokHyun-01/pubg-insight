@@ -23,7 +23,7 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
 
                 // h2-console 접근 허용을 위한 설정 배포 시 없애기 !
-                .headers(h->h.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+                .headers(h -> h.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
 
                 .cors(Customizer.withDefaults())
                 .httpBasic(b -> b.disable())
@@ -36,6 +36,8 @@ public class SecurityConfig {
                         // h2-console 접근 허용을 위한 설정 배포 시 없애기 !
                         .requestMatchers("/h2-console/**").permitAll()
 
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
+
                         .anyRequest().authenticated()
                 );
         return http.build();
@@ -46,7 +48,7 @@ public class SecurityConfig {
         var c = new CorsConfiguration();
         c.setAllowedOrigins(List.of("http://localhost:5173", "https://pubginfohub.com"));
         c.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        c.setAllowedHeaders(List.of("Authorization","Content-Type","Accept"));
+        c.setAllowedHeaders(List.of("Authorization", "Content-Type", "Accept"));
         c.setAllowCredentials(true);
         var s = new UrlBasedCorsConfigurationSource();
         s.registerCorsConfiguration("/**", c);
