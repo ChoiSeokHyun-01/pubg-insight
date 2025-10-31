@@ -1,0 +1,7 @@
+.env*
+
+# Collector outputs and exports
+collector/out/
+collector/players/
+collector/*.json
+collector/*.jsonl
