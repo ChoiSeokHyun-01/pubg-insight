@@ -21,6 +21,8 @@ public class SeasonController implements SeasonControllerSwagger {
 //    private final RankStatsService rankStatsService;
 
 
+//    private final RankStatsService rankStatsService;
+
     @Override
     @GetMapping("{platform}/season")
     public List<SeasonResponse> fetchAll(
