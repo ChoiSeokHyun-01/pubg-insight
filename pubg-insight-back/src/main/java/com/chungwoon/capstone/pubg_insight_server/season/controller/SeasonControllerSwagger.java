@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
@@ -33,7 +34,7 @@ public interface SeasonControllerSwagger {
                     name = "platform", required = true, example = "steam",
                     schema = @Schema(allowableValues = {"steam", "kakao"})
             )
-            @RequestParam String platform,
+            @PathVariable String platform,
             @Parameter(name = "refresh", description = "초기/강제 동기화 시 true", example = "false")
             @RequestParam(defaultValue = "false") boolean refresh
     );
