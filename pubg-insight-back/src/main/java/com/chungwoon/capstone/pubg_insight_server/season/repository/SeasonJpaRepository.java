@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface SeasonJpaRepository extends JpaRepository<SeasonEntity, Long> {
     @Query("SELECT s FROM SeasonEntity s WHERE s.platform = :platform")
@@ -16,5 +17,6 @@ public interface SeasonJpaRepository extends JpaRepository<SeasonEntity, Long> {
     @Query("delete from SeasonEntity s where s.platform = :platform")
     void deleteByPlatform(@Param("platform") String platform);
 
-    boolean existsBySeasonIdAndPlatform(String seasonId, String platform);
+   @Query("SELECT s.seasonId FROM SeasonEntity s WHERE s.current = true AND s.platform= :platform")
+   Optional<String> findCurrentSeasonId(@Param("platform") String platform);
 }

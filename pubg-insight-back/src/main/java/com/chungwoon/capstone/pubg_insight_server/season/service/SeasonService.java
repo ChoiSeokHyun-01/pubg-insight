@@ -1,5 +1,7 @@
-package com.chungwoon.capstone.pubg_insight_server.season;
+package com.chungwoon.capstone.pubg_insight_server.season.service;
 
+import com.chungwoon.capstone.pubg_insight_server.season.Season;
+import com.chungwoon.capstone.pubg_insight_server.season.SeasonMapper;
 import com.chungwoon.capstone.pubg_insight_server.season.repository.SeasonJpaRepository;
 import com.chungwoon.capstone.pubg_insight_server.season.repository.SeasonRepository;
 import lombok.RequiredArgsConstructor;
@@ -38,5 +40,11 @@ public class SeasonService {
                 .map(s -> SeasonMapper.toEntity(s, p))
                 .toList();
         seasonJpaRepository.saveAll(entities);
+    }
+
+    public String getCurrentSeasonId(String platform) {
+        String platformLower = platform.toLowerCase();
+        return seasonJpaRepository.findCurrentSeasonId(platformLower)
+                .orElseThrow(()-> new IllegalArgumentException("현재 시즌이 존재하지 않습니다."));
     }
 }
