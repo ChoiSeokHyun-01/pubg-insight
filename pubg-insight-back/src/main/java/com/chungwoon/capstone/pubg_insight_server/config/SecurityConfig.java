@@ -36,7 +36,7 @@ public class SecurityConfig {
                         // h2-console 접근 허용을 위한 설정 배포 시 없애기 !
                         .requestMatchers("/h2-console/**").permitAll()
 
-                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**").permitAll()
+                        .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/api-docs/**").permitAll()
 
                         .anyRequest().authenticated()
                 );

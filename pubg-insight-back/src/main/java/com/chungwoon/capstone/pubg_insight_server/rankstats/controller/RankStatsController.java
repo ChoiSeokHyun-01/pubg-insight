@@ -1,21 +1,25 @@
-package com.chungwoon.capstone.pubg_insight_server.rankstats;
+package com.chungwoon.capstone.pubg_insight_server.rankstats.controller;
 
 import com.chungwoon.capstone.pubg_insight_server.player.DTO.PlayerResponse;
 import com.chungwoon.capstone.pubg_insight_server.player.PlayerService;
 import com.chungwoon.capstone.pubg_insight_server.rankstats.DTO.RankStatsBundle;
+import com.chungwoon.capstone.pubg_insight_server.rankstats.RankStatsService;
 import com.chungwoon.capstone.pubg_insight_server.season.SeasonService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@Tag(name = "RankStats", description = "PUBG 랭크통계 관련 API")
 @RestController
 @RequestMapping("/api/ranked")
 @RequiredArgsConstructor
-public class RankStatsController {
+public class RankStatsController implements RankStatsControllerSwagger {
     private final RankStatsService rankStatsService;
     private final PlayerService playerService;
     private final SeasonService seasonService;
 
+    @Override
     @GetMapping("/{platform}/{name}")
     public ResponseEntity<RankStatsBundle> get(
             @PathVariable String platform,

@@ -35,6 +35,7 @@ public interface SeasonControllerSwagger {
                     schema = @Schema(allowableValues = {"steam", "kakao"})
             )
             @PathVariable String platform,
+
             @Parameter(name = "refresh", description = "초기/강제 동기화 시 true", example = "false")
             @RequestParam(defaultValue = "false") boolean refresh
     );
