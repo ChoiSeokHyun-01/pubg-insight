@@ -1,6 +1,6 @@
 package com.chungwoon.capstone.pubg_insight_server.season;
 
-import com.chungwoon.capstone.pubg_insight_server.season.seasonDTO.SeasonResponse;
+import com.chungwoon.capstone.pubg_insight_server.season.DTO.SeasonResponse;
 
 import java.time.Instant;
 import java.util.List;

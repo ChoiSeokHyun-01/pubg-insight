@@ -1,7 +1,5 @@
-package com.chungwoon.capstone.pubg_insight_server.season.service;
+package com.chungwoon.capstone.pubg_insight_server.season;
 
-import com.chungwoon.capstone.pubg_insight_server.season.Season;
-import com.chungwoon.capstone.pubg_insight_server.season.SeasonMapper;
 import com.chungwoon.capstone.pubg_insight_server.season.repository.SeasonJpaRepository;
 import com.chungwoon.capstone.pubg_insight_server.season.repository.SeasonRepository;
 import lombok.RequiredArgsConstructor;

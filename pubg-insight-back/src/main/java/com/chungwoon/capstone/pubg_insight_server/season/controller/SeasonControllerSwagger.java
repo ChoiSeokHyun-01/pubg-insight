@@ -1,6 +1,6 @@
 package com.chungwoon.capstone.pubg_insight_server.season.controller;
 
-import com.chungwoon.capstone.pubg_insight_server.season.seasonDTO.SeasonResponse;
+import com.chungwoon.capstone.pubg_insight_server.season.DTO.SeasonResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
