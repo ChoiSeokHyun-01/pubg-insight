@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 @Tag(name = "RankStats", description = "PUBG 랭크통계 관련 API")
 @RestController
-@RequestMapping("/api/ranked")
+@RequestMapping("/api/rankstats")
 @RequiredArgsConstructor
 public class RankStatsController implements RankStatsControllerSwagger {
     private final RankStatsService rankStatsService;
