@@ -49,6 +49,10 @@ dependencies {
 
 	// 수정사항 생길 시 자동 재시작
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// s3
+	implementation platform('software.amazon.awssdk:bom:2.25.20')
+	implementation 'software.amazon.awssdk:s3'
 }
 
 tasks.named('test') {
