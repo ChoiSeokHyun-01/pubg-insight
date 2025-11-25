@@ -18,7 +18,6 @@ public class MatchService {
             throw new IllegalArgumentException("해당 유저의 최근 매치 정보가 없습니다.");
         }
 
-        return new MatchResponse(matches.stream().map(MatchEntity::getMatchId).toList());
-
+        return MatchMapper.toResponse(matches);
     }
 }

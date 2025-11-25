@@ -1,5 +1,6 @@
 package com.chungwoon.capstone.pubg_insight_server.match;
 
+import com.chungwoon.capstone.pubg_insight_server.match.dto.MatchResponse;
 import com.chungwoon.capstone.pubg_insight_server.player.DTO.PlayerResponse;
 import com.chungwoon.capstone.pubg_insight_server.player.DTO.PubgPlayerResponse;
 import com.chungwoon.capstone.pubg_insight_server.player.PlayerEntity;
@@ -13,18 +14,9 @@ public final class MatchMapper {
     private MatchMapper() {
     }
 
-//    public static List<MatchEntity> toMatchEntity(PlayerEntity player, PlayerResponse.PlayerData playerData){
-//        var matches = Optional.ofNullable(playerData.relationships())
-//                .map(PlayerResponse.Relationships::matches)
-//                .map(PlayerResponse.Matches::data)
-//                .orElse(List.of());
-//        return matches.stream()
-//                .map(m -> MatchEntity.builder()
-//                        .player(player)
-//                        .matchId(m.id())
-//                        .build())
-//                .toList();
-//    }
+    public static MatchResponse toResponse(List<MatchEntity> matches) {
+        return new MatchResponse(matches.stream().map(MatchEntity::getMatchId).toList());
+    }
 
     public List<MatchEntity> fromPubg(PlayerEntity player, PubgPlayerResponse.PlayerData playerData) {
         var matches = playerData.relationships() != null && playerData.relationships().matches() != null
