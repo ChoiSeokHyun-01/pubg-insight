@@ -10,11 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 public interface MatchDetailControllerSwagger {
     @Operation(
-            summary = "해당 유저의 전적 기록 가져오기",
+            summary = "해당 유저가 플레이한 매치에 대한 상세 정보 가져오기",
             description = """
-                    조회 방식: DB에 있나 확인 후 있으면 반환 없으면 PUBG로 요청,
-                    
-                    refresh를 true로 하면 전적갱신 (PUBG에서 데이터를 가져와 DB에 저장 후 반환)
+                    조회 방식: DB에 있나 확인 후 있으면 반환 없으면 PUBG로 요청 전적갱신에는 포함하지 않음, 매치리스트가 없으면 전적 갱신을 애초에 안해도 됨
                     """,
             responses = {
                     @ApiResponse(responseCode = "200", description = "플레이어의 매치 전적 가져오기",
