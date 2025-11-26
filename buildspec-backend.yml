@@ -1,0 +1,62 @@
+version: 0.2
+
+env:
+  variables:
+    BACKEND_DIR: "pubg-insight-back"
+    JAR_NAME: "pubg-insight-server-0.0.1-SNAPSHOT.jar"
+    S3_BUCKET: "pubginfohub-backend-deploy"
+    S3_KEY: "app.jar"
+    EC2_INSTANCE_ID: "i-0f163ab6d786b88df"
+
+phases:
+  install:
+    runtime-versions:
+      java: corretto17
+    commands:
+      - echo "[install] Java 17 & Gradle 환경 확인"
+      - echo "CODEBUILD_SRC_DIR = $CODEBUILD_SRC_DIR"
+      - cd "$CODEBUILD_SRC_DIR/$BACKEND_DIR"
+      - pwd
+      - ls -al
+      - chmod +x gradlew
+      - ./gradlew --version
+
+  pre_build:
+    commands:
+      - echo "[pre_build] Cleaning project"
+      - cd "$CODEBUILD_SRC_DIR/$BACKEND_DIR"
+      - pwd
+      - ls -al
+      - ./gradlew clean
+
+  build:
+    commands:
+      - echo "[build] Starting Gradle build"
+      - cd "$CODEBUILD_SRC_DIR/$BACKEND_DIR"
+      - pwd
+      - ls -al
+      - ./gradlew build -x test
+      - echo "[build] Build output:"
+      - ls -al build/libs
+
+  post_build:
+    commands:
+      - echo "[post_build] Uploading JAR to S3"
+      - cd "$CODEBUILD_SRC_DIR/$BACKEND_DIR"
+      - aws s3 cp "build/libs/$JAR_NAME" "s3://$S3_BUCKET/$S3_KEY"
+      - echo "[post_build] JAR upload complete"
+
+      - echo "[deploy] Sending SSM RunCommand to EC2 for deployment"
+      - |
+        aws ssm send-command \
+          --instance-ids "$EC2_INSTANCE_ID" \
+          --document-name "AWS-RunShellScript" \
+          --comment "Deploy PUBG Insight Backend" \
+          --parameters commands="sudo /opt/deploy/deploy.sh" \
+          --region ap-northeast-2
+      - echo "[deploy] Deployment command sent"
+
+artifacts:
+  files:
+    - pubg-insight-back/build/libs/*.jar
+  discard-paths: yes
