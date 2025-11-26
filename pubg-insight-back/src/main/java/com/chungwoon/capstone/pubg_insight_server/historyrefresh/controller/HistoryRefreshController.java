@@ -1,7 +1,8 @@
 package com.chungwoon.capstone.pubg_insight_server.historyrefresh.controller;
 
+import com.chungwoon.capstone.pubg_insight_server.historyrefresh.HistoryRefreshMapper;
+import com.chungwoon.capstone.pubg_insight_server.historyrefresh.dto.HistoryRefreshResponse;
 import com.chungwoon.capstone.pubg_insight_server.historyrefresh.HistoryRefreshService;
-import com.chungwoon.capstone.pubg_insight_server.match.dto.MatchResponse;
 import com.chungwoon.capstone.pubg_insight_server.rankstats.controller.RankStatsController;
 import com.chungwoon.capstone.pubg_insight_server.seasonstats.controller.SeasonStatsController;
 import lombok.RequiredArgsConstructor;
@@ -19,13 +20,15 @@ public class HistoryRefreshController {
     private final HistoryRefreshService historyRefreshService;
 
     @GetMapping("/{platform}/{accountId}/{name}/refresh")
-    public MatchResponse refreshHistory(
+    public HistoryRefreshResponse refreshHistory(
             @PathVariable String platform,
             @PathVariable String accountId,
             @PathVariable String name
     ) {
-        seasonStatsController.get(platform, name, null, true);
-        rankStatsController.get(platform, name, null, true);
-        return historyRefreshService.updateHistory(platform, name, accountId);
+        var refreshedSeasonStats = seasonStatsController.get(platform, name, null, true);
+        var refreshedRankStats = rankStatsController.get(platform, name, null, true);
+        var refreshedMatches = historyRefreshService.updateHistory(platform, name, accountId);
+
+        return HistoryRefreshMapper.toResponse(refreshedSeasonStats, refreshedRankStats, refreshedMatches);
     }
 }
