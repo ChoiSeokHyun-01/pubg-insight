@@ -1,5 +1,6 @@
-package com.chungwoon.capstone.pubg_insight_server.historyrefresh;
+package com.chungwoon.capstone.pubg_insight_server.historyrefresh.controller;
 
+import com.chungwoon.capstone.pubg_insight_server.historyrefresh.HistoryRefreshService;
 import com.chungwoon.capstone.pubg_insight_server.match.dto.MatchResponse;
 import com.chungwoon.capstone.pubg_insight_server.rankstats.controller.RankStatsController;
 import com.chungwoon.capstone.pubg_insight_server.seasonstats.controller.SeasonStatsController;
