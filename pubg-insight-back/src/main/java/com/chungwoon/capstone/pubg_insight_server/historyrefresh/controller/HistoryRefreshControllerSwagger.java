@@ -1,9 +1,11 @@
 package com.chungwoon.capstone.pubg_insight_server.historyrefresh.controller;
 
+import com.chungwoon.capstone.pubg_insight_server.historyrefresh.dto.HistoryRefreshResponse;
 import com.chungwoon.capstone.pubg_insight_server.match.dto.MatchResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -16,7 +18,8 @@ public interface HistoryRefreshControllerSwagger {
             responses = {
                     @ApiResponse(responseCode = "200", description = "유저의 시즌, 랭크, 전적 정보 갱신하기",
                             content = @Content(
-                                    mediaType = "application/json"
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = HistoryRefreshResponse.class)
                             )
                     )
             }
