@@ -1,14 +1,12 @@
 package com.chungwoon.capstone.pubg_insight_server.match.controller;
 
 import com.chungwoon.capstone.pubg_insight_server.match.dto.MatchResponse;
-import com.chungwoon.capstone.pubg_insight_server.matchdetail.dto.MatchDetailResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
 
 public interface MatchControllerSwagger {
     @Operation(
@@ -26,6 +24,6 @@ public interface MatchControllerSwagger {
             }
     )
     public MatchResponse getMatch(
-            @Parameter(name = "accountId", required = true, example = "account.12341234")
+            @Parameter(name = "accountId", required = true, example = "account.c0e530e9b7244b358def282782f893af")
             @PathVariable String accountId);
 }

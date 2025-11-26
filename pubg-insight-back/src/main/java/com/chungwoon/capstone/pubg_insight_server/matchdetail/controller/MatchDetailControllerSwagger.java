@@ -31,7 +31,7 @@ public interface MatchDetailControllerSwagger {
             @Parameter(name = "matchId", required = true, example = "abcd-1234-efgh-5678")
             @PathVariable String matchId,
 
-            @Parameter(name = "accountId", required = true, example = "account.12341234")
+            @Parameter(name = "accountId", required = true, example = "account.c0e530e9b7244b358def282782f893af")
             @PathVariable String accountId);
 
 }
