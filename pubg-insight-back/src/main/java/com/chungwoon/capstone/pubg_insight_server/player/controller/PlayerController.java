@@ -19,7 +19,10 @@ public class PlayerController implements PlayerControllerSwagger {
 
     @Override
     @GetMapping("/{platform}/{name}")
-    public PlayerResponse getByName(@PathVariable String platform, @PathVariable String name) {
+    public PlayerResponse getByName(
+            @PathVariable String platform,
+            @PathVariable String name
+    ) {
         return playerService.getByName(platform, name);
     }
 }

@@ -33,11 +33,10 @@ public class PlayerService {
         PlayerEntity newPlayer = playerRepository.save(playerMapper.fromPubg(apiPlayer));
 
         for (var match : matchMapper.fromPubg(newPlayer, apiPlayer)) {
-            if(!matchRepository.existsByPlayerAndMatchId(newPlayer, match.getMatchId())){
+            if (!matchRepository.existsByPlayerAndMatchId(newPlayer, match.getMatchId())) {
                 matchRepository.save(match);
             }
         }
         return playerMapper.toResponse(newPlayer);
     }
-
 }

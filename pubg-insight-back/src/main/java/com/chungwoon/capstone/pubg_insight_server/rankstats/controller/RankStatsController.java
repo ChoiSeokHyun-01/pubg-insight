@@ -25,7 +25,8 @@ public class RankStatsController implements RankStatsControllerSwagger {
             @PathVariable String platform,
             @PathVariable String name,
             @RequestParam(required = false) String seasonId,
-            @RequestParam(defaultValue = "false") boolean refresh) {
+            @RequestParam(defaultValue = "false") boolean refresh
+    ) {
         String resolvedSeason = (seasonId == null || seasonId.isBlank())
                 ? seasonService.getCurrentSeasonId(platform) : seasonId;
 

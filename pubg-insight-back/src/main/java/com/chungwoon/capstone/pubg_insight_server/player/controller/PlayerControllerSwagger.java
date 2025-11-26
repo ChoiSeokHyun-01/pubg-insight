@@ -29,5 +29,6 @@ public interface PlayerControllerSwagger {
             @PathVariable String platform,
 
             @Parameter(name = "name", description = "대소문자 구분", example = "WackyJacky101")
-            @PathVariable String name);
+            @PathVariable String name
+    );
 }
