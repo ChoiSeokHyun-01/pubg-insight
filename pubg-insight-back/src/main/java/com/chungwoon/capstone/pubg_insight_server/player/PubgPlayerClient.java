@@ -3,12 +3,10 @@ package com.chungwoon.capstone.pubg_insight_server.player;
 import com.chungwoon.capstone.pubg_insight_server.player.DTO.PubgPlayerResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatusCode;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.util.NoSuchElementException;
 import java.util.Optional;
 
 @Component
@@ -26,10 +24,16 @@ public class PubgPlayerClient {
                 .uri(url)
                 .header("Authorization", "Bearer " + pubgApiKey)
                 .header("Accept", "application/vnd.api+json")
-                .retrieve()
-                .onStatus(s -> s.value() == 404, resp -> resp.releaseBody().then(Mono.error(new NoSuchElementException())))
-                .onStatus(HttpStatusCode::isError, resp -> resp.createException())
-                .bodyToMono(PubgPlayerResponse.class)
+                .exchangeToMono(res -> {
+                    if (res.statusCode().value() == 404) {
+                        // 404면 그냥 결과 없음
+                        return Mono.empty();
+                    }
+                    if (res.statusCode().isError()) {
+                        return res.createException().flatMap(Mono::error);
+                    }
+                    return res.bodyToMono(PubgPlayerResponse.class);
+                })
                 .block();
 
         if (body == null || body.data() == null || body.data().isEmpty()) return Optional.empty();
