@@ -22,8 +22,8 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
 
-                // h2-console 접근 허용을 위한 설정 배포 시 없애기 !
-                .headers(h -> h.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+                // h2-console 접근 허용을 위한 설정 배포 시 주석처리 !
+//                .headers(h -> h.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
 
                 .cors(Customizer.withDefaults())
                 .httpBasic(b -> b.disable())
@@ -33,8 +33,8 @@ public class SecurityConfig {
                         .requestMatchers("/", "/healthcheck", "index.html").permitAll()
                         .requestMatchers("/api/**").permitAll()
 
-                        // h2-console 접근 허용을 위한 설정 배포 시 없애기 !
-                        .requestMatchers("/h2-console/**").permitAll()
+                        // h2-console 접근 허용을 위한 설정 배포 시 주석처리 !
+//                        .requestMatchers("/h2-console/**").permitAll()
 
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/api-docs/**").permitAll()
 
