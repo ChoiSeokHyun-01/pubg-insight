@@ -7,36 +7,36 @@ env:
     S3_BUCKET: "pubginfohub-backend-deploy"
     S3_KEY: "app.jar"
     EC2_INSTANCE_ID: "i-0f163ab6d786b88df"
-  runtime-versions:
-    java: corretto17
 
 phases:
   install:
+    runtime-versions:
+      java: corretto17
     commands:
       - echo "[install] Java 17 & Gradle 환경 확인"
-      - cd $BACKEND_DIR
-      - chmod +x gradlew
-      - ./gradlew --version
+      - pwd
+      - ls -al
+      - cd "$BACKEND_DIR" && chmod +x gradlew && ./gradlew --version
 
   pre_build:
     commands:
       - echo "[pre_build] Cleaning project"
-      - cd $BACKEND_DIR
-      - ./gradlew clean
+      - pwd
+      - ls -al
+      - cd "$BACKEND_DIR" && ./gradlew clean
 
   build:
     commands:
       - echo "[build] Starting Gradle build"
-      - cd $BACKEND_DIR
-      - ./gradlew build -x test
-      - echo "[build] Build output:"
-      - ls -al build/libs
+      - pwd
+      - ls -al
+      - cd "$BACKEND_DIR" && ./gradlew build -x test
+      - cd "$BACKEND_DIR" && echo "[build] Build output:" && ls -al build/libs
 
   post_build:
     commands:
       - echo "[post_build] Uploading JAR to S3"
-      - cd $BACKEND_DIR
-      - aws s3 cp "build/libs/$JAR_NAME" "s3://$S3_BUCKET/$S3_KEY"
+      - cd "$BACKEND_DIR" && aws s3 cp "build/libs/$JAR_NAME" "s3://$S3_BUCKET/$S3_KEY"
       - echo "[post_build] JAR upload complete"
 
       - echo "[deploy] Sending SSM RunCommand to EC2 for deployment"
