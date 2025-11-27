@@ -24,7 +24,7 @@ public interface HistoryRefreshControllerSwagger {
                     )
             }
     )
-    public MatchResponse getMatch(
+    public HistoryRefreshResponse refreshHistory(
             @Parameter(name = "platform", required = true, example = "steam")
             @PathVariable String platform,
 
