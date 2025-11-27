@@ -10,33 +10,25 @@ export default function PlayerOverviewPage() {
   const [activeTab, setActiveTab] = useState<"TPP" | "FPP">("TPP");
 
   return (
-    <div className="container mx-auto px-4 py-6 max-w-5xl">
+    <div className="page-container">
       <PlayerSummaryCard />
 
-      <div className="mt-6 flex gap-2">
+      <div className="pill-buttons">
         <button
           onClick={() => setActiveTab("TPP")}
-          className={`px-6 py-2 rounded-full font-medium transition-colors ${
-            activeTab === "TPP"
-              ? "bg-blue-500 text-white"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-          }`}
+          className={`pill-button ${activeTab === "TPP" ? "is-active" : ""}`}
         >
           TPP
         </button>
         <button
           onClick={() => setActiveTab("FPP")}
-          className={`px-6 py-2 rounded-full font-medium transition-colors ${
-            activeTab === "FPP"
-              ? "bg-blue-500 text-white"
-              : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-          }`}
+          className={`pill-button ${activeTab === "FPP" ? "is-active" : ""}`}
         >
           FPP
         </button>
       </div>
 
-      <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+      <div className="stats-panels">
         <RankedSection mode={activeTab} />
         <CasualSection mode={activeTab} />
       </div>

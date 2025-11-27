@@ -6,60 +6,60 @@ interface RankedSectionProps {
 
 export default function RankedSection({ mode }: RankedSectionProps) {
   return (
-    <div className="bg-blue-600 text-white rounded-lg overflow-hidden">
-      <div className="bg-blue-700 px-4 py-2 font-medium">듀오</div>
+    <div className="stats-panel stats-panel--ranked">
+      <div className="stats-panel__header">듀오</div>
 
-      <div className="p-6">
-        <div className="flex items-center justify-center mb-4">
-          <Shirt className="w-16 h-16 text-blue-300" />
+      <div className="stats-panel__body">
+        <div className="stats-header-row">
+          <Shirt size={64} className="stats-icon" />
         </div>
-        <p className="text-center text-blue-200 text-sm">기록 없음</p>
+        <p className="stat-label">기록 없음</p>
 
-        <div className="mt-6 grid grid-cols-3 gap-4 text-sm">
+        <div className="stats-grid">
           <div>
-            <div className="text-blue-200 mb-1">KDA</div>
-            <div className="font-medium">-</div>
+            <div className="stat-label">KDA</div>
+            <div className="stat-value">-</div>
           </div>
           <div>
-            <div className="text-blue-200 mb-1">승률</div>
-            <div className="font-medium">-</div>
+            <div className="stat-label">승률</div>
+            <div className="stat-value">-</div>
           </div>
           <div>
-            <div className="text-blue-200 mb-1">Top10</div>
-            <div className="font-medium">-</div>
-          </div>
-        </div>
-
-        <div className="mt-6 pt-4 border-t border-blue-500">
-          <div className="grid grid-cols-3 gap-4 text-sm">
-            <div>
-              <div className="text-blue-200 mb-1">평균 딜량</div>
-              <div className="font-medium">게임 수</div>
-            </div>
-            <div>
-              <div className="text-blue-200 mb-1">게임 수</div>
-              <div className="font-medium">평균 등수</div>
-            </div>
-            <div>
-              <div className="text-blue-200 mb-1">평균 등수</div>
-              <div className="font-medium">-</div>
-            </div>
+            <div className="stat-label">Top10</div>
+            <div className="stat-value">-</div>
           </div>
         </div>
 
-        <div className="mt-6 pt-4 border-t border-blue-500">
-          <div className="grid grid-cols-3 gap-4 text-sm">
+        <div className="metrics-divider">
+          <div className="stats-grid">
             <div>
-              <div className="text-blue-200 mb-1">헤드샷</div>
-              <div className="font-medium">치킨</div>
+              <div className="stat-label">평균 딜량</div>
+              <div className="stat-value">게임 수</div>
             </div>
             <div>
-              <div className="text-blue-200 mb-1">치킨</div>
-              <div className="font-medium">생존</div>
+              <div className="stat-label">게임 수</div>
+              <div className="stat-value">평균 등수</div>
             </div>
             <div>
-              <div className="text-blue-200 mb-1">생존</div>
-              <div className="font-medium">-</div>
+              <div className="stat-label">평균 등수</div>
+              <div className="stat-value">-</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="metrics-divider">
+          <div className="stats-grid">
+            <div>
+              <div className="stat-label">헤드샷</div>
+              <div className="stat-value">치킨</div>
+            </div>
+            <div>
+              <div className="stat-label">치킨</div>
+              <div className="stat-value">생존</div>
+            </div>
+            <div>
+              <div className="stat-label">생존</div>
+              <div className="stat-value">-</div>
             </div>
           </div>
         </div>
