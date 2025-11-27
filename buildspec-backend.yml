@@ -46,16 +46,6 @@ phases:
       - aws s3 cp "build/libs/$JAR_NAME" "s3://$S3_BUCKET/$S3_KEY"
       - echo "[post_build] JAR upload complete"
 
-      - echo "[deploy] Sending SSM RunCommand to EC2 for deployment"
-      - |
-        aws ssm send-command \
-          --instance-ids "$EC2_INSTANCE_ID" \
-          --document-name "AWS-RunShellScript" \
-          --comment "Deploy PUBG Insight Backend" \
-          --parameters commands="sudo /opt/deploy/deploy.sh" \
-          --region ap-northeast-2
-      - echo "[deploy] Deployment command sent"
-
 artifacts:
   files:
     - pubg-insight-back/build/libs/*.jar
