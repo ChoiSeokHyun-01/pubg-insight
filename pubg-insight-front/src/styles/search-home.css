@@ -71,3 +71,94 @@
   width: 22px;
   height: 22px;
 }
+
+/* ===== 다크모드 토글 버튼 ===== */
+
+.search-home__theme-toggle {
+  position: absolute;
+  top: 20px;
+  right: 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+
+  /* 여기 중요 👇 */
+  background-color: rgba(15, 23, 42, 0.8);
+  /* 진한 남색 캡슐 */
+  color: #f9fafb;
+  /* 흰 글씨 */
+  border: 1px solid rgba(148, 163, 184, 0.8);
+
+  backdrop-filter: blur(8px);
+  transition: background-color 0.15s ease, transform 0.1s ease,
+    box-shadow 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.search-home__theme-toggle svg {
+  display: block;
+  color: inherit;
+  /* 아이콘 색도 글씨랑 같이 */
+}
+
+.search-home__theme-toggle:hover {
+  background-color: rgba(15, 23, 42, 1);
+  box-shadow: 0 6px 16px rgba(15, 23, 42, 0.5);
+  transform: translateY(-1px);
+}
+
+.search-home__theme-toggle:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+.search-home__theme-label {
+  letter-spacing: 0.04em;
+}
+
+/* ===== 다크모드 스타일 ===== */
+
+.search-home.search-home--dark {
+  background: #020617;
+  color: #e5e7eb;
+}
+
+.search-home.search-home--dark .search-home__title {
+  color: #facc15;
+}
+
+.search-home.search-home--dark .search-home__input {
+  background: #020617;
+  border-color: #1f2937;
+  color: #f9fafb;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.6);
+}
+
+.search-home.search-home--dark .search-home__input::placeholder {
+  color: #64748b;
+}
+
+.search-home.search-home--dark .search-home__input:focus {
+  border-color: #facc15;
+  box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.18);
+}
+
+.search-home.search-home--dark .search-home__icon {
+  color: #cbd5f5;
+}
+
+/* 다크 모드일 때 토글 버튼 뒤집기 */
+.search-home.search-home--dark .search-home__theme-toggle {
+  background-color: #f9fafb;
+  color: #020617;
+  border-color: #e5e7eb;
+}
+
+.search-home.search-home--dark .search-home__theme-toggle:hover {
+  background-color: #e5e7eb;
+}
