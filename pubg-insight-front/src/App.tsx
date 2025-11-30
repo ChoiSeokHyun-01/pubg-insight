@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Header from "./components/layout/Header";
 import MapPage from "./pages/Map";
 import './styles/app.css'
 
@@ -6,6 +7,7 @@ export default function App() {
     return (
         <>
             <BrowserRouter>
+                <Header />
                 <Routes>
                     <Route path="/" element={<></>}></Route>
                     <Route path="/map/:name" element={<MapPage />}></Route>
