@@ -1,11 +1,12 @@
 import { NavLink } from "react-router-dom";
 import LogoIcon from "../icon/LogoIcon";
+import HeaderSearch from "../search/HeaderSearch";
 import "../../styles/header.css";
 
 const NAV_ITEMS = [
     { label: "메인", to: "/" },
     { label: "지도", to: "/map", hasSubmenu: true },
-    { label: "자료", to: "/data", hasSubmenu: true },
+    { label: "데이터", to: "/data", hasSubmenu: true },
     { label: "랭커", to: "/ranker" },
 ];
 
@@ -16,14 +17,12 @@ export default function Header() {
                 <div className="header__top">
                     <NavLink to="/" className="header__logo">
                         <div className="header__logo-mark">
-                            <LogoIcon viewBox="0 0 200 200" />
+                            <LogoIcon />
                         </div>
-                        <span className="header__logo-text">PUBG INSIGHT</span>
+                        <span className="header__logo-text">PUBG INFO HUB</span>
                     </NavLink>
 
-                    <div className="header__search">
-                        <span className="header__search-placeholder">검색 기능 준비중</span>
-                    </div>
+                    <HeaderSearch />
                 </div>
 
                 <nav className="header__bottom" aria-label="주요 메뉴">

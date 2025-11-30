@@ -1,15 +1,13 @@
 type Props = {
-    viewBox?: string
     color?: string
 };
 
 export default function icon({
-    viewBox = "0 0 200 200",
     color = "var(--color-main)"
 }: Props) {
     return <>
         <svg
-            viewBox={viewBox}
+            viewBox="0 0 200 200"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
         >

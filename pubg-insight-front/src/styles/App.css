@@ -8,13 +8,6 @@
   --color-sub-2: #466474;
   --color-error: #F56565;
 
-  /* 그림자 */
-  --shadow-main: 0 0 5px 0 #FDAD13;
-  --shadow-sub-1: 0 0 5px 0 #202A33;
-  --shadow-sub-2: 0 0 5px 0 #466474;
-  --shadow-error: 0 0 5px 0 #F56565;
-  --shadow-gray: 0 0 5px 0 #666666;
-
   /* 뷰포트 */
   --size-viewport: clamp(500px, 100vw,100vw);
 
