@@ -1,0 +1,25 @@
+{
+  "version": "1",
+  "map": "erangel",
+  "ref": { "zBase": 6, "worldSize": 16384, "tileSize": 256 },
+  "icons": {
+    "비밀의 방": "/icons/secret-room.png"
+  },
+  "pins": [
+    { "id": "secret-1", "type": "비밀의 방", "x": 2446, "y": 2980, "label": "비밀의 방", "anchor": "bottom" },
+    { "id": "secret-2", "type": "비밀의 방", "x": 4979, "y": 3809, "label": "비밀의 방", "anchor": "bottom" },
+    { "id": "secret-3", "type": "비밀의 방", "x": 8367, "y": 2835, "label": "비밀의 방", "anchor": "bottom" },
+    { "id": "secret-4", "type": "비밀의 방", "x": 10201, "y": 598, "label": "비밀의 방", "anchor": "bottom" },
+    { "id": "secret-5", "type": "비밀의 방", "x": 13654, "y": 3624, "label": "비밀의 방", "anchor": "bottom" },
+    { "id": "secret-6", "type": "비밀의 방", "x": 2577, "y": 6596, "label": "비밀의 방", "anchor": "bottom" },
+    { "id": "secret-7", "type": "비밀의 방", "x": 5865, "y": 7410, "label": "비밀의 방", "anchor": "bottom" },
+    { "id": "secret-8", "type": "비밀의 방", "x": 11360, "y": 6574, "label": "비밀의 방", "anchor": "bottom" },
+    { "id": "secret-9", "type": "비밀의 방", "x": 9437, "y": 8361, "label": "비밀의 방", "anchor": "bottom" },
+    { "id": "secret-10", "type": "비밀의 방", "x": 2075, "y": 11004, "label": "비밀의 방", "anchor": "bottom" },
+    { "id": "secret-11", "type": "비밀의 방", "x": 5308, "y": 10577, "label": "비밀의 방", "anchor": "bottom" },
+    { "id": "secret-12", "type": "비밀의 방", "x": 14135, "y": 9369, "label": "비밀의 방", "anchor": "bottom" },
+    { "id": "secret-13", "type": "비밀의 방", "x": 8760, "y": 11843, "label": "비밀의 방", "anchor": "bottom" },
+    { "id": "secret-14", "type": "비밀의 방", "x": 6641, "y": 13302, "label": "비밀의 방", "anchor": "bottom" },
+    { "id": "secret-15", "type": "비밀의 방", "x": 11737, "y": 13368, "label": "비밀의 방", "anchor": "bottom" }
+  ]
+}
