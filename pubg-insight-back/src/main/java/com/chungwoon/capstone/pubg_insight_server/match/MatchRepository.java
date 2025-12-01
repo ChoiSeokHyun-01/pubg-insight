@@ -9,4 +9,5 @@ import java.util.Optional;
 public interface MatchRepository extends JpaRepository<MatchEntity, Long> {
     boolean existsByPlayerAndMatchId(PlayerEntity player, String matchId);
     List<MatchEntity> findByPlayerAccountId(String accountId);
+    List<MatchEntity> findByPlayer(PlayerEntity player);
 }
