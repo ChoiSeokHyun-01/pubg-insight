@@ -305,8 +305,8 @@ export default function Profile() {
     const subTier = data?.subTier;
     const rp = data?.currentRankPoint;
     // 정식 배지 파일은 public/Insignias에 Tier/SubTier가 대소문자 포함 그대로 들어있음
-    const iconName = subTier ? `${tier}-${subTier}` : tier;
-    const iconSrc = `/Insignias/${iconName}.png`;
+        const iconName = subTier ? `${tier}-${subTier}` : tier;
+        const iconSrc = `/PUBG/Insignias/${iconName}.png`;
 
     const entries: StatEntry[] = [
       { label: "KDA", value: formatNumber(data?.kda, 2) },

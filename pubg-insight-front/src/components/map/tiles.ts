@@ -8,5 +8,5 @@ export const clamp = (value: number, min: number, max: number) =>
 export const tilesPerSide = (z: number) => 2 ** z;
 
 export const tileUrl = (name: string, z: number, x: number, y: number) =>
-  `/map/${encodeURIComponent(name)}/${z}/${x}/${y}.png`;
+  `/PUBG/map/${encodeURIComponent(name)}/${z}/${x}/${y}.png`;
 
