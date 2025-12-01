@@ -1,7 +1,6 @@
 package com.chungwoon.capstone.pubg_insight_server.historyrefresh.controller;
 
 import com.chungwoon.capstone.pubg_insight_server.historyrefresh.dto.HistoryRefreshResponse;
-import com.chungwoon.capstone.pubg_insight_server.match.dto.MatchResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -25,7 +24,9 @@ public interface HistoryRefreshControllerSwagger {
             }
     )
     public HistoryRefreshResponse refreshHistory(
-            @Parameter(name = "platform", required = true, example = "steam")
+            @Parameter(name = "platform", required = true, example = "steam",
+                    schema = @Schema(allowableValues = {"steam", "kakao"}))
+
             @PathVariable String platform,
 
             @Parameter(name = "accountId", required = true, example = "account.c0e530e9b7244b358def282782f893af")
