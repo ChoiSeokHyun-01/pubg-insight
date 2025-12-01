@@ -20,6 +20,9 @@ public class MatchDetailService {
         platform = platform.toLowerCase();
 
         MatchDetailEntity detail = matchDetailFetchService.getOrCreateMatchDetail(platform, matchId);
+        if (!detail.getPlatform().equals(platform)) {
+            throw new IllegalArgumentException("요청한 플랫폼과 실제 응답 데이터의 플랫폼이 일치하지 않습니다.");
+        }
         List<Map<String,Object>> included = s3MatchIncludedStorage.loadIncluded(platform, matchId);
 
         Map<String, Object> participant = includedFinder.findParticipantsByAccountId(included, accountId);

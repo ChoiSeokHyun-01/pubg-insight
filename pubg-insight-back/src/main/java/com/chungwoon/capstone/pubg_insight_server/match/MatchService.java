@@ -29,11 +29,12 @@ public class MatchService {
         return MatchMapper.toResponse(matches);
     }
 
-    public MatchResponse updateMatch(String name, String platform) {
+    public MatchResponse updateMatch(String name, String platform, String accountId) {
         platform = platform.toLowerCase();
 
-        PlayerEntity player = playerRepository.findByShardIdAndName(platform, name)
+        PlayerEntity player = playerRepository.findByAccountIdAndShardId(accountId, platform)
                 .orElseThrow(() -> new IllegalArgumentException("해당 유저가 존재하지 않습니다."));
+
         PubgPlayerResponse.PlayerData newPlayerData = pubgPlayerClient.findByName(platform, name)
                 .orElseThrow(() -> new IllegalArgumentException("해당 닉네임을 가진 유저가 존재하지 않습니다."));
 
@@ -47,7 +48,7 @@ public class MatchService {
             matchRepository.saveAll(newMatches);
         }
 
-        List<MatchEntity> refreshedMatches = matchRepository.findByPlayerAccountId(player.getAccountId());
+        List<MatchEntity> refreshedMatches = matchRepository.findByPlayer(player);
 
         return MatchMapper.toResponse(refreshedMatches);
     }

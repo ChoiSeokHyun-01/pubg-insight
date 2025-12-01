@@ -12,7 +12,7 @@ public class HistoryRefreshService {
     private final MatchService matchService;
 
     public MatchResponse updateHistory(String platform, String name, String accountId) {
-        MatchResponse refreshedMatches = matchService.updateMatch(name, platform);
+        MatchResponse refreshedMatches = matchService.updateMatch(name, platform, accountId);
 
         historyRefreshRepository.findByAccountId(accountId)
                 .orElseGet(() -> historyRefreshCreate(accountId));

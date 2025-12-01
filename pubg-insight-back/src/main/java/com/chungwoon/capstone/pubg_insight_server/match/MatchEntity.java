@@ -7,7 +7,7 @@ import lombok.*;
 @Entity
 @Table(name = "matches",
         uniqueConstraints = {
-                @UniqueConstraint(name = "uk_match", columnNames = {"player_account_id", "match_id"})
+                @UniqueConstraint(name = "uk_match", columnNames = {"player_id", "match_id"})
         })
 @Getter
 @Builder
@@ -19,10 +19,10 @@ public class MatchEntity {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "player_account_id",
-            referencedColumnName = "account_id",
+    @JoinColumn(name = "player_id",
+            referencedColumnName = "id",
             nullable = false,
-            foreignKey = @ForeignKey(name = "fk_match_player_account"))
+            foreignKey = @ForeignKey(name = "fk_match_player"))
     private PlayerEntity player;
 
     @Column(name = "match_id", nullable = false, length = 40)

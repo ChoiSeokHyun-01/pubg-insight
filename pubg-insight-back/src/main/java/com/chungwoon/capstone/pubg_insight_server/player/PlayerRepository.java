@@ -6,4 +6,5 @@ import java.util.Optional;
 
 public interface PlayerRepository extends JpaRepository<PlayerEntity, Long> {
     Optional<PlayerEntity> findByShardIdAndName(String shardId, String name);
+    Optional<PlayerEntity> findByAccountIdAndShardId(String accountId, String shardId);
 }
