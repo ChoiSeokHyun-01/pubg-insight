@@ -23,6 +23,11 @@ public class MatchDetailFetchService {
     private MatchDetailEntity fetchAndStore(String platform, String matchId) {
         PubgMatchDetailResponse response = pubgMatchDetailClient.fetch(platform, matchId);
 
+        String shardId = response.data().attributes().shardId();
+
+        if (!shardId.equals(platform)) {
+            throw new IllegalArgumentException("요청한 플랫폼과 실제 응답 데이터의 플랫폼이 일치하지 않습니다.");
+        }
         s3MatchIncludedStorage.saveIncluded(platform, matchId, response.included());
         String includedS3key = s3MatchIncludedStorage.buildKey(platform, matchId);
 
