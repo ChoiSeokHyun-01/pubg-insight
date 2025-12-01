@@ -56,3 +56,7 @@ springdoc:
 app:
   s3:
     match-bucket: pubginfohub-match-record-bucket
+
+season:
+  refresh:
+    admin-token: ${SEASON_REFRESH_ADMIN_TOKEN}
