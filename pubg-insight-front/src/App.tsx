@@ -1,37 +1,23 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import "./styles/App.css";
-import HealthCheck from "./pages/HealthCheck";
-import MapPage from "./pages/Map";
-import Home from "./pages/Home";
-import PlayerSearch from "./pages/tmp/PlayerSearch";
-
 import Header from "./components/layout/Header";
-import Footer from "./components/layout/Footer";
-import PlayerOverviewPage from "./pages/PlayerOverniewPage";
-import SearchHome from "./pages/SearchHome";
+import HomePage from "./pages/Home";
+import MapPage from "./pages/Map";
+import MapListPage from "./pages/MapList";
+import ProfilePage from "./pages/Profile";
+import './styles/app.css'
 
 export default function App() {
     return (
         <>
-            <Header />
             <BrowserRouter>
+                <Header />
                 <Routes>
-                    <Route path="/" element={<Home></Home>}></Route>
+                    <Route path="/" element={<HomePage />}></Route>
+                    <Route path="/maps" element={<MapListPage />}></Route>
                     <Route path="/map/:name" element={<MapPage />}></Route>
-                    <Route path="/map" element={<MapPage />}></Route>
-                    <Route
-                        path="/PlayerSearch"
-                        element={<PlayerSearch></PlayerSearch>}
-                    ></Route>
-                    <Route
-                        path="/HealthCheck"
-                        element={<HealthCheck></HealthCheck>}
-                    ></Route>
-                    <Route path="/search-home" element={<SearchHome />}></Route>
-                    <Route path="/match-history" element={<PlayerOverviewPage />}></Route>
+                    <Route path="/profile/:platform/:name" element={<ProfilePage />}></Route>
                 </Routes>
             </BrowserRouter>
-            <Footer />
         </>
     );
 }

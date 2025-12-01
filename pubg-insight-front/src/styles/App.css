@@ -1,55 +1,31 @@
-#root {
-  margin: 0 auto;
-  text-align: center;
+:root {
+  font-family: "Segoe UI", "Noto Sans KR", system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+
+  /* color */
+  --color-main: #FDAD13;
+  --color-sub-1: #202A33;
+  --color-sub-2: #466474;
+  --color-error: #F56565;
+
+  /* 뷰포트 */
+  --size-viewport: clamp(300px, 100vw,100vw);
+
+  /* 컨테이너 기준*/
+  --size-container: clamp(300px, 100%, 1140px);
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+* {
+  box-sizing: border-box;
 }
 
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
-/* Full-viewport layout overrides for HealthCheck page */
-html, body, #root {
-  height: 100dvh;
-  width: 100%;
-  /* Help mobile browsers deliver multi-touch to our map container */
-  touch-action: none;
-  overscroll-behavior: none;
-}
 body {
-  display: block; /* override index.css flex centering */
+  margin: 0;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }

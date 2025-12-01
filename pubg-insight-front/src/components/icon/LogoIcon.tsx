@@ -1,110 +1,57 @@
-type Props = { viewBox?: string };
+type Props = {
+    color?: string
+};
 
-export default function icon({ viewBox = "0 0 180 180" }: Props) {
+export default function icon({
+    color = "var(--color-main)"
+}: Props) {
     return <>
         <svg
-            viewBox={viewBox}
-            fill="none"
+            viewBox="0 0 200 200"
             xmlns="http://www.w3.org/2000/svg"
-            className="search-home__logo"
+            fill="none"
         >
-            <path
-                d="M90 20C70 20 54 36 54 56C54 82 90 120 90 120C90 120 126 82 126 56C126 36 110 20 90 20Z"
-                fill="#F59E0B"
-                stroke="#F59E0B"
-                strokeWidth="3"
-            />
-            <circle cx="90" cy="56" r="12" fill="white" />
-            <rect
-                x="55"
-                y="90"
-                width="20"
-                height="20"
-                rx="2"
-                stroke="#F59E0B"
-                strokeWidth="3"
-                fill="none"
-            />
-            <rect
-                x="80"
-                y="90"
-                width="20"
-                height="20"
-                rx="2"
-                stroke="#F59E0B"
-                strokeWidth="3"
-                fill="none"
-            />
-            <rect
-                x="55"
-                y="115"
-                width="20"
-                height="20"
-                rx="2"
-                stroke="#F59E0B"
-                strokeWidth="3"
-                fill="none"
-            />
-            <rect
-                x="80"
-                y="115"
-                width="20"
-                height="20"
-                rx="2"
-                stroke="#F59E0B"
-                strokeWidth="3"
-                fill="none"
-            />
-            <rect
-                x="55"
-                y="140"
-                width="20"
-                height="20"
-                rx="2"
-                stroke="#F59E0B"
-                strokeWidth="3"
-                fill="none"
-            />
-            <rect
-                x="80"
-                y="140"
-                width="20"
-                height="20"
-                rx="2"
-                stroke="#F59E0B"
-                strokeWidth="3"
-                fill="none"
-            />
-            <rect
-                x="105"
-                y="90"
-                width="20"
-                height="20"
-                rx="2"
-                stroke="#F59E0B"
-                strokeWidth="3"
-                fill="none"
-            />
-            <rect
-                x="105"
-                y="115"
-                width="20"
-                height="20"
-                rx="2"
-                stroke="#F59E0B"
-                strokeWidth="3"
-                fill="none"
-            />
-            <rect
-                x="105"
-                y="140"
-                width="20"
-                height="20"
-                rx="2"
-                stroke="#F59E0B"
-                strokeWidth="3"
-                fill="none"
-            />
+            <mask id="pinHoleMask">
+                <rect x="0" y="0" width="200" height="200" fill="white" />
+
+                <path
+                    d="M72 46
+                    A 30 30 0 1 1 128 46
+                    L100 100
+                    Z"
+                    stroke="black"
+                    stroke-width="10"
+                    fill="none"
+                />
+                <path
+                    d="M72 46
+                    A 30 30 0 1 1 128 46
+                    L100 100
+                    Z"
+                    fill="white"
+                />
+                <circle cx="100" cy="35" r="20" fill="black" />
+            </mask>
+
+            <g mask="url(#pinHoleMask)">
+                <rect x="25" y="30" width="150" height="150" rx="10" stroke={color} stroke-width="5" fill="none" />
+
+                <line x1="75" y1="30" x2="75" y2="180" stroke={color} stroke-width="5" />
+                <line x1="125" y1="30" x2="125" y2="180" stroke={color} stroke-width="5" />
+
+                <line x1="25" y1="80" x2="175" y2="80" stroke={color} stroke-width="5" />
+                <line x1="25" y1="130" x2="175" y2="130" stroke={color} stroke-width="5" />
+
+                <path
+                    d="M72 46
+                    A 30 30 0 1 1 128 46
+                    L100 100
+                    Z"
+                    fill={color}
+                    stroke={color}
+                    stroke-width="3"
+                />
+            </g>
         </svg>
     </>
 }
