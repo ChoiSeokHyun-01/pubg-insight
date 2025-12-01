@@ -301,14 +301,17 @@
 
 .match-row__left {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   gap: 6px;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .match-row__main {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  flex: 1;
 }
 
 .match-row__mode {
@@ -323,14 +326,6 @@
   flex-wrap: wrap;
   color: #6a7380;
   font-size: 12px;
-}
-
-.match-row__meta .muted {
-  color: #9aa3b3;
-}
-
-.match-row__meta .divider {
-  color: #c0c6d2;
 }
 
 .match-row__stats {
@@ -359,6 +354,7 @@
 .match-row__actions {
   display: flex;
   align-items: flex-start;
+  margin-left: auto;
 }
 
 .match-row__toggle {

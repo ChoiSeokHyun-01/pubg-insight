@@ -25,19 +25,19 @@ function useLocationParams() {
 }
 
 const FRAME_STYLE: CSSProperties = {
-  width: "90vw",
-  height: "90vh",
-  margin: "auto",
-  borderRadius: "12px",
+  width: "100%",
+  height: "100vh",
   overflow: "hidden",
   border: "1px solid rgba(255, 255, 255, 0.08)",
   background: "#050505",
   boxShadow: "0 20px 45px rgba(0, 0, 0, 0.35)",
-  position: "relative",
+  position: "fixed",
+  top: "0",
+  left: "0",
 };
 
 const CONTROLLER_STYLE: CSSProperties = {
-  width: "100%",
+  width: "100%",              
   height: "100%",
 };
 
@@ -55,6 +55,7 @@ export default function MapFramePage() {
   const url = useLocationParams();
   const [pinTypes, setPinTypes] = useState<PinTypeInfo[]>([]);
   const [typeVisibility, setTypeVisibility] = useState<Record<string, boolean>>({});
+  const [filterOpen, setFilterOpen] = useState<boolean>(true);
 
   const pathParts = url.pathname.split("/").filter(Boolean);
   const nameFromPath = pathParts[0] === "map" && pathParts[1] ? pathParts[1] : undefined;
@@ -133,10 +134,13 @@ export default function MapFramePage() {
           />
         </MapController>
         {pinTypes.length > 0 ? (
-          <div className="map-type-filter">
+          <div className={`map-type-filter${filterOpen ? "" : " map-type-filter--collapsed"}`}>
             <div className="map-type-filter-header">
               <span className="map-type-filter-title">핀 필터</span>
               <div className="map-type-filter-actions">
+                <button type="button" onClick={() => setFilterOpen((v) => !v)}>
+                  {filterOpen ? "접기" : "펼치기"}
+                </button>
                 <button type="button" onClick={() => setAllTypes(true)}>
                   전체
                 </button>
@@ -145,28 +149,30 @@ export default function MapFramePage() {
                 </button>
               </div>
             </div>
-            <ul className="map-type-filter-list">
-              {pinTypes.map(({ type, color, count }) => {
-                const checked = typeVisibility[type] ?? true;
-                return (
-                  <li key={type}>
-                    <label className="map-type-filter-item">
-                      <input
-                        type="checkbox"
-                        checked={checked}
-                        onChange={() => toggleType(type)}
-                      />
-                      <span
-                        className="map-type-filter-color"
-                        style={{ backgroundColor: color }}
-                      />
-                      <span className="map-type-filter-label">{type}</span>
-                      <span className="map-type-filter-count">{count}</span>
-                    </label>
-                  </li>
-                );
-              })}
-            </ul>
+            {filterOpen && (
+              <ul className="map-type-filter-list">
+                {pinTypes.map(({ type, color, count }) => {
+                  const checked = typeVisibility[type] ?? true;
+                  return (
+                    <li key={type}>
+                      <label className="map-type-filter-item">
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={() => toggleType(type)}
+                        />
+                        <span
+                          className="map-type-filter-color"
+                          style={{ backgroundColor: color }}
+                        />
+                        <span className="map-type-filter-label">{type}</span>
+                        <span className="map-type-filter-count">{count}</span>
+                      </label>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
           </div>
         ) : null}
       </div>

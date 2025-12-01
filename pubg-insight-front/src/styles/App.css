@@ -9,10 +9,10 @@
   --color-error: #F56565;
 
   /* 뷰포트 */
-  --size-viewport: clamp(500px, 100vw,100vw);
+  --size-viewport: clamp(300px, 100vw,100vw);
 
   /* 컨테이너 기준*/
-  --size-container: clamp(500px, 100%, 1140px);
+  --size-container: clamp(300px, 100%, 1140px);
 }
 
 * {

@@ -1,18 +1,40 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
+import { useEffect, useState } from "react";
 import LogoIcon from "../icon/LogoIcon";
 import HeaderSearch from "../search/HeaderSearch";
 import "../../styles/header.css";
 
 const NAV_ITEMS = [
     { label: "메인", to: "/" },
-    { label: "지도", to: "/map/sanhok", hasSubmenu: true },
-    { label: "데이터", to: "/data", hasSubmenu: true },
-    { label: "랭커", to: "/ranker" },
+    { label: "지도", to: "/maps" },
+    { label: "데이터", to: "/data" },
+    // { label: "랭커", to: "/ranker" },
 ];
 
 export default function Header() {
+    const location = useLocation();
+    const isMapRoute = location.pathname.startsWith("/map/");
+    const [isVisible, setIsVisible] = useState<boolean>(!isMapRoute);
+
+    useEffect(() => {
+        if (!isMapRoute) {
+            setIsVisible(true);
+            return;
+        }
+        setIsVisible(false);
+
+        const handleMouseMove = (e: MouseEvent) => {
+            const nearTop = e.clientY < 200;
+            setIsVisible(nearTop);
+        };
+        window.addEventListener("mousemove", handleMouseMove);
+        return () => window.removeEventListener("mousemove", handleMouseMove);
+    }, [isMapRoute]);
+
     return (
-        <header className="header">
+        <header
+            className={`header${isMapRoute ? (isVisible ? " header--shown" : " header--hidden") : ""}`}
+        >
             <div className="header__container">
                 <div className="header__top">
                     <NavLink to="/" className="header__logo">
@@ -27,10 +49,7 @@ export default function Header() {
 
                 <nav className="header__bottom" aria-label="주요 메뉴">
                     {NAV_ITEMS.map((item) => (
-                        <div
-                            key={item.label}
-                            className={`header__nav-item${item.hasSubmenu ? " has-submenu" : ""}`}
-                        >
+                        <div key={item.label} className="header__nav-item">
                             <NavLink
                                 to={item.to}
                                 className={({ isActive }) =>
@@ -39,14 +58,6 @@ export default function Header() {
                             >
                                 {item.label}
                             </NavLink>
-
-                            {item.hasSubmenu && (
-                                <div className="header__submenu" aria-hidden="true">
-                                    <div className="header__submenu-surface">
-                                        <div className="header__submenu-placeholder" />
-                                    </div>
-                                </div>
-                            )}
                         </div>
                     ))}
                 </nav>

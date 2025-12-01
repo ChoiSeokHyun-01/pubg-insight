@@ -52,9 +52,29 @@ function formatSurvival(seconds?: number | null) {
 }
 
 function formatDistance(meters?: number | null) {
-  if (meters === undefined || meters === null || Number.isNaN(meters)) return "—";
-  if (meters >= 1000) return `${(meters / 1000).toFixed(2)}km`;
-  return `${meters.toFixed(0)}m`;
+    if (meters === undefined || meters === null || Number.isNaN(meters)) return "—";
+    if (meters >= 1000) return `${(meters / 1000).toFixed(2)}km`;
+    return `${meters.toFixed(0)}m`;
+}
+
+const MAP_NAME_DICT: Record<string, string> = {
+    Baltic_Main: "Erangel (Remastered)",
+    Chimera_Main: "Paramo",
+    Desert_Main: "Miramar",
+    DihorOtok_Main: "Vikendi",
+    Erangel_Main: "Erangel",
+    Heaven_Main: "Haven",
+    Kiki_Main: "Deston",
+    Range_Main: "Camp Jackal",
+    Savage_Main: "Sanhok",
+    Summerland_Main: "Karakin",
+    Tiger_Main: "Taego",
+    Neon_Main: "Rondo",
+};
+
+function mapNameLabel(mapName?: string | null) {
+    if (!mapName) return "맵 정보 없음";
+    return MAP_NAME_DICT[mapName] ?? mapName;
 }
 
 export default function Profile() {
@@ -138,25 +158,27 @@ export default function Profile() {
       return;
     }
 
-    try {
-      const rankData = await fetchRankStats(selectedPlatform, nickname, false);
-      setRankStats(rankData);
-      setRankState("success");
-    } catch (err) {
-      setRankError("랭크 정보를 불러오지 못했습니다.");
-      setRankState("error");
-    }
+        try {
+            const rankData = await fetchRankStats(selectedPlatform, nickname, false);
+            setRankStats(rankData);
+            setRankState("success");
+        } catch (err) {
+            setRankError("랭크 정보를 불러오지 못했습니다.");
+            setRankState("error");
+        }
 
-    try {
-      const seasonData = await fetchSeasonStats(selectedPlatform, nickname, false);
-      setSeasonStats(seasonData);
-      setSeasonState("success");
-    } catch (err) {
-      setSeasonError("일반 전적 정보를 불러오지 못했습니다.");
-      setSeasonState("error");
-    }
+        let seasonDataLocal: SeasonStatsBundle | null = null;
+        try {
+            const seasonData = await fetchSeasonStats(selectedPlatform, nickname, false);
+            setSeasonStats(seasonData);
+            setSeasonState("success");
+            seasonDataLocal = seasonData;
+        } catch (err) {
+            setSeasonError("일반 전적 정보를 불러오지 못했습니다.");
+            setSeasonState("error");
+        }
 
-    try {
+        try {
             const matches = await fetchMatchHistory(loadedPlayer.accountId);
             setMatchHistory(matches);
             setMatchState("success");
@@ -167,8 +189,35 @@ export default function Profile() {
             setMatchState("error");
         }
 
-    setLastUpdated(new Date());
-  };
+        // 시즌 전적이 모두 비었으면 한 번만 갱신 시도
+        const isSeasonEmpty = (bundle: SeasonStatsBundle | null) =>
+            !bundle?.squad && !bundle?.duo && !bundle?.solo;
+        if (isSeasonEmpty(seasonDataLocal)) {
+            try {
+                const refreshed = await refreshHistory(selectedPlatform, loadedPlayer.accountId, nickname);
+                if (refreshed.rankStatsBundle) {
+                    setRankStats(refreshed.rankStatsBundle);
+                    setRankState("success");
+                }
+                if (refreshed.seasonStatsBundle) {
+                    setSeasonStats(refreshed.seasonStatsBundle);
+                    setSeasonState("success");
+                }
+                if (refreshed.matchResponse) {
+                    setMatchHistory(refreshed.matchResponse);
+                    setMatchDetails({});
+                    setMatchLimit(5);
+                    fetchMatchDetails(refreshed.matchResponse.matchIds.slice(0, 5), loadedPlayer.accountId);
+                    setMatchState("success");
+                }
+            } catch (err) {
+                // 이미 한 번 기본 요청을 했으므로 추가 에러는 노트만 남김
+                setSeasonError((prev) => prev ?? "일반 전적 정보를 갱신하지 못했습니다.");
+            }
+        }
+
+        setLastUpdated(new Date());
+    };
 
   const lastKeyRef = useRef<string | null>(null);
 
@@ -420,16 +469,22 @@ export default function Profile() {
                       <div className="match-row__left">
                         <div className="match-row__main">
                           <div className="match-row__mode">
-                            {detail?.gameMode ?? "게임 모드 불명"} ·{" "}
-                            {detail?.mapName ?? "맵 정보 없음"}
+                                                    {detail?.gameMode ?? "게임 모드 불명"} · {mapNameLabel(detail?.mapName)}
                           </div>
                           <div className="match-row__meta">
                             <span>{detail?.createdAt ? new Date(detail.createdAt).toLocaleString() : "—"}</span>
-                            <span className="divider">|</span>
-                            <span className="muted">{detail?.id ?? id}</span>
                           </div>
                         </div>
-                        <div className="match-row__stats">
+                        <div className="match-row__actions">
+                        <button
+                          className="match-row__toggle"
+                          onClick={() => setExpandedMatchId(isExpanded ? null : id)}
+                        >
+                          {isExpanded ? "접기" : "상세"}
+                        </button>
+                      </div>
+                      </div>
+                      <div className="match-row__details">
                           <div className="match-row__stat">
                             <div className="label">킬</div>
                             <div className="value">{stats?.kills ?? "—"}</div>
@@ -455,15 +510,6 @@ export default function Profile() {
                             <div className="value">{detail?.roster?.participantIds?.length ?? "—"}</div>
                           </div>
                         </div>
-                      </div>
-                      <div className="match-row__actions">
-                        <button
-                          className="match-row__toggle"
-                          onClick={() => setExpandedMatchId(isExpanded ? null : id)}
-                        >
-                          {isExpanded ? "접기" : "상세"}
-                        </button>
-                      </div>
                       {isExpanded && stats && (
                         <div className="match-row__details">
                           <div className="match-row__stat">
