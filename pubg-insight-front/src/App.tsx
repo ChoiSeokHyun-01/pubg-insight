@@ -4,6 +4,7 @@ import HomePage from "./pages/Home";
 import MapPage from "./pages/Map";
 import MapListPage from "./pages/MapList";
 import ProfilePage from "./pages/Profile";
+import PinEditorPage from "./pages/PinEditor";
 import './styles/app.css'
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
                     <Route path="/maps" element={<MapListPage />}></Route>
                     <Route path="/map/:name" element={<MapPage />}></Route>
                     <Route path="/profile/:platform/:name" element={<ProfilePage />}></Route>
+                    <Route path="/pin-editor" element={<PinEditorPage />}></Route>
                 </Routes>
             </BrowserRouter>
         </>

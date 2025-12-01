@@ -19,7 +19,7 @@ interface TileRender {
 
 export function MapView({ tileUrl = defaultTileUrl, onTileError }: MapViewProps) {
   const { name, viewport, scale, z } = useMapView();
-  const [failed, setFailed] = useState<Record<string, boolean>>({});
+  const [failed, setFailed] = useState<Record<string, number>>({});
 
   const tiles = useMemo<TileRender[]>(() => {
     const list: TileRender[] = [];
@@ -46,27 +46,33 @@ export function MapView({ tileUrl = defaultTileUrl, onTileError }: MapViewProps)
   return (
     <>
       {tiles.map(({ key, x, y, left, top, sizePx, src }) => {
-        const hasFailed = failed[key];
+        const hasFailed = failed[key] ?? 0;
         return (
           <div
             key={key}
             className="map-tile"
             style={{ left, top, width: sizePx, height: sizePx }}
           >
-            {hasFailed ? (
+            {hasFailed >= 2 ? (
               <div className="map-tile-failed">
                 {x},{y}
               </div>
             ) : (
               <img
-                src={src}
+                src={hasFailed === 1 ? (src.startsWith("http") ? src : `https://www.pubginfohub.com${src}`) : src}
                 alt=""
                 className="map-tile-img"
                 loading="lazy"
                 draggable={false}
                 onError={() => {
-                  setFailed((prev) => ({ ...prev, [key]: true }));
-                  onTileError?.({ name, z, x, y });
+                  setFailed((prev) => {
+                    const nextAttempt = (prev[key] ?? 0) + 1;
+                    // 1st failure triggers fallback try, 2nd failure marks as failed.
+                    if (nextAttempt >= 2) {
+                      onTileError?.({ name, z, x, y });
+                    }
+                    return { ...prev, [key]: nextAttempt };
+                  });
                 }}
               />
             )}
