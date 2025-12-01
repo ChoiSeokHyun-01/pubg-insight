@@ -3,6 +3,8 @@ package com.chungwoon.capstone.pubg_insight_server.config;
 import io.swagger.v3.oas.models.Components;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.security.SecurityRequirement;
+import io.swagger.v3.oas.models.security.SecurityScheme;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -11,7 +13,14 @@ public class SwaggerConfig {
     @Bean
     public OpenAPI openAPI() {
         return new OpenAPI()
-                .components(new Components())
+                .addSecurityItem(new SecurityRequirement().addList("admin-token"))
+                .components(new Components()
+                        .addSecuritySchemes("admin-token",
+                                new SecurityScheme()
+                                        .name("X-ADMIN-TOKEN")
+                                        .type(SecurityScheme.Type.APIKEY)
+                        )
+                )
                 .info(apiInfo());
     }
 
