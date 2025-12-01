@@ -32,7 +32,7 @@ export default function MapList() {
             <Link key={m.key} to={m.to} className="map-card">
               <div
                 className="map-card__thumb"
-                style={{ backgroundImage: `url(/map/${m.key}/0/0.png)` }}
+                style={{ backgroundImage: `url(/PUBG/map/${m.key}/0/0.png)` }}
                 aria-label={`${m.label} 미리보기`}
               />
               <div className="map-card__label">{m.label}</div>
