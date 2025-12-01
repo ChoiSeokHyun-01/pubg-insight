@@ -128,7 +128,7 @@ export default function MapFramePage() {
         <MapController style={CONTROLLER_STYLE}>
           <MapView />
           <PinLayer
-            source={`/map/${name}/layers.json`}
+            source={`/PUBG/map/${name}/layers.json`}
             visibleTypes={visibleTypes}
             onTypesChange={handleTypesChange}
           />
