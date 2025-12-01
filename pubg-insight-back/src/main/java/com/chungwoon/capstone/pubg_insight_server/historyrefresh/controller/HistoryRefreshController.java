@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.time.LocalDateTime;
+
 @Tag(name = "HistoryRefresh", description = "PUBG 전적갱신 관련 API")
 @RestController
 @RequiredArgsConstructor
@@ -32,6 +34,8 @@ public class HistoryRefreshController implements HistoryRefreshControllerSwagger
         var refreshedRankStats = rankStatsController.get(platform, name, null, true);
         var refreshedMatches = historyRefreshService.updateHistory(platform, name, accountId);
 
-        return HistoryRefreshMapper.toResponse(refreshedSeasonStats, refreshedRankStats, refreshedMatches);
+        LocalDateTime lastRefreshedAt = historyRefreshService.getLastRefreshedAt(accountId);
+
+        return HistoryRefreshMapper.toResponse(refreshedSeasonStats, refreshedRankStats, refreshedMatches, lastRefreshedAt);
     }
 }

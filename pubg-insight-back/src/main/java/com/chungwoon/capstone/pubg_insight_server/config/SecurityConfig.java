@@ -3,11 +3,13 @@ package com.chungwoon.capstone.pubg_insight_server.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authorization.AuthorizationDecision;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.IpAddressMatcher;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -22,8 +24,8 @@ public class SecurityConfig {
         http
                 .csrf(csrf -> csrf.disable())
 
-                // h2-console 접근 허용을 위한 설정 배포 시 주석처리 !
-//                .headers(h -> h.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+//                 h2-console 접근 허용을 위한 설정 배포 시 주석처리 !
+                .headers(h -> h.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
 
                 .cors(Customizer.withDefaults())
                 .httpBasic(b -> b.disable())
@@ -31,12 +33,22 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .requestMatchers("/", "/healthcheck", "index.html").permitAll()
-                        .requestMatchers("/api/**").permitAll()
 
                         // h2-console 접근 허용을 위한 설정 배포 시 주석처리 !
-//                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/h2-console/**").permitAll()
 
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/api-docs/**").permitAll()
+
+                        .requestMatchers("/api/internal/**")
+                        .access((authentication, context) -> {
+                            String remoteIp = context.getRequest().getRemoteAddr();
+                            boolean allowed =
+                                    new IpAddressMatcher("127.0.0.1").matches(remoteIp) || new IpAddressMatcher("::1").matches(remoteIp);
+
+                            return new AuthorizationDecision(allowed);
+                        })
+
+                        .requestMatchers("/api/**").permitAll()
 
                         .anyRequest().authenticated()
                 );
