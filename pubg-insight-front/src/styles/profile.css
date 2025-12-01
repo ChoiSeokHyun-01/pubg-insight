@@ -2,7 +2,7 @@
   flex: 1;
   display: flex;
   justify-content: center;
-  padding: 60px 16px 100px;
+  padding: 60px 14px 100px;
   background: #f5f7fb;
 }
 
@@ -282,6 +282,120 @@
   color: #111723;
 }
 
+.match-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.match-row {
+  background: #fdfdff;
+  border: 1px solid #e3e8f0;
+  border-radius: 12px;
+  padding: 12px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 10px;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.05);
+}
+
+.match-row__left {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.match-row__main {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.match-row__mode {
+  font-weight: 800;
+  color: #0f1724;
+  font-size: 15px;
+}
+
+.match-row__meta {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  color: #6a7380;
+  font-size: 12px;
+}
+
+.match-row__meta .muted {
+  color: #9aa3b3;
+}
+
+.match-row__meta .divider {
+  color: #c0c6d2;
+}
+
+.match-row__stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+}
+
+.match-row__stat {
+  background: #fff;
+  border: 1px solid #e7ecf3;
+  border-radius: 10px;
+  padding: 8px 10px;
+}
+
+.match-row__stat .label {
+  font-size: 11px;
+  color: #7a8494;
+}
+
+.match-row__stat .value {
+  font-weight: 800;
+  color: #0f1724;
+}
+
+.match-row__actions {
+  display: flex;
+  align-items: flex-start;
+}
+
+.match-row__toggle {
+  background: #0f57ff;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 14px;
+  font-weight: 700;
+  cursor: pointer;
+  min-width: 70px;
+}
+
+.match-row__details {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 8px;
+}
+
+.match-row--expanded {
+  border-color: #c9d5ff;
+  box-shadow: 0 10px 24px rgba(15, 87, 255, 0.08);
+}
+
+.match-row__more {
+  margin-top: 8px;
+  width: 100%;
+  background: #0f57ff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}
+
 @media (max-width: 720px) {
   .profile-hero__top {
     flex-direction: column;
@@ -291,5 +405,13 @@
   .profile-hero__main {
     flex-direction: column;
     align-items: flex-start;
+  }
+
+  .match-row {
+    grid-template-columns: 1fr;
+  }
+
+  .match-row__actions {
+    justify-content: flex-start;
   }
 }

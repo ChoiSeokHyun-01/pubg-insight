@@ -5,7 +5,7 @@ import "../../styles/header.css";
 
 const NAV_ITEMS = [
     { label: "메인", to: "/" },
-    { label: "지도", to: "/map", hasSubmenu: true },
+    { label: "지도", to: "/map/sanhok", hasSubmenu: true },
     { label: "데이터", to: "/data", hasSubmenu: true },
     { label: "랭커", to: "/ranker" },
 ];
