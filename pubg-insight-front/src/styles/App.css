@@ -1,0 +1,31 @@
+:root {
+  font-family: "Segoe UI", "Noto Sans KR", system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+
+  /* color */
+  --color-main: #FDAD13;
+  --color-sub-1: #202A33;
+  --color-sub-2: #466474;
+  --color-error: #F56565;
+
+  /* 뷰포트 */
+  --size-viewport: clamp(300px, 100vw,100vw);
+
+  /* 컨테이너 기준*/
+  --size-container: clamp(300px, 100%, 1140px);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
