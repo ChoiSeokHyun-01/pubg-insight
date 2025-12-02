@@ -7,34 +7,34 @@ import "../../styles/header.css";
 const NAV_ITEMS = [
     { label: "메인", to: "/" },
     { label: "지도", to: "/maps" },
-    // { label: "핀 에디터", to: "/pin-editor" },
-    // { label: "데이터", to: "/data" },
-    // { label: "랭커", to: "/ranker" },
+    { label: "프레젠테이션", to: "/presentation" },
 ];
 
 export default function Header() {
     const location = useLocation();
     const isMapRoute = location.pathname.startsWith("/map/");
-    const [isVisible, setIsVisible] = useState<boolean>(!isMapRoute);
+    const isPresentation = location.pathname === "/presentation";
+    const hideHeader = isMapRoute || isPresentation;
+    const [isVisible, setIsVisible] = useState<boolean>(!hideHeader);
 
     useEffect(() => {
-        if (!isMapRoute) {
+        if (!hideHeader) {
             setIsVisible(true);
             return;
         }
         setIsVisible(false);
 
         const handleMouseMove = (e: MouseEvent) => {
-            const nearTop = e.clientY < 200;
+            const nearTop = e.clientY < 125;
             setIsVisible(nearTop);
         };
         window.addEventListener("mousemove", handleMouseMove);
         return () => window.removeEventListener("mousemove", handleMouseMove);
-    }, [isMapRoute]);
+    }, [hideHeader]);
 
     return (
         <header
-            className={`header${isMapRoute ? (isVisible ? " header--shown" : " header--hidden") : ""}`}
+            className={`header${hideHeader ? (isVisible ? " header--shown" : " header--hidden") : ""}`}
         >
             <div className="header__container">
                 <div className="header__top">
