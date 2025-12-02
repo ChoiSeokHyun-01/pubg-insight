@@ -1,0 +1,18 @@
+{
+  "version": "1",
+  "map": "paramo",
+  "ref": {
+    "zBase": 6,
+    "worldSize": 16384,
+    "tileSize": 256
+  },
+  "icons": {
+    "차량": "/icons/vehicle-ground.png",
+    "글라이더": "/icons/vehicle-glider.png",
+    "보트": "/icons/vehicle-boat.png"
+  },
+  "pins": [],
+  "meta": {
+    "matches": 2
+  }
+}

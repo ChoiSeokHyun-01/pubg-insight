@@ -1,0 +1,46 @@
+{
+  "version": "1",
+  "map": "camp jackal",
+  "ref": {
+    "zBase": 6,
+    "worldSize": 16384,
+    "tileSize": 256
+  },
+  "icons": {
+    "차량": "/icons/vehicle-ground.png",
+    "글라이더": "/icons/vehicle-glider.png",
+    "보트": "/icons/vehicle-boat.png"
+  },
+  "pins": [
+    {
+      "id": "camp jackal-차량-2912-2880",
+      "type": "차량",
+      "x": 2912,
+      "y": 2880,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "camp jackal-차량-2624-2784",
+      "type": "차량",
+      "x": 2624,
+      "y": 2784,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "camp jackal-차량-2304-2944",
+      "type": "차량",
+      "x": 2304,
+      "y": 2944,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    }
+  ],
+  "meta": {
+    "matches": 1
+  }
+}

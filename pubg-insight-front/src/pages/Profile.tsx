@@ -52,29 +52,29 @@ function formatSurvival(seconds?: number | null) {
 }
 
 function formatDistance(meters?: number | null) {
-    if (meters === undefined || meters === null || Number.isNaN(meters)) return "—";
-    if (meters >= 1000) return `${(meters / 1000).toFixed(2)}km`;
-    return `${meters.toFixed(0)}m`;
+  if (meters === undefined || meters === null || Number.isNaN(meters)) return "—";
+  if (meters >= 1000) return `${(meters / 1000).toFixed(2)}km`;
+  return `${meters.toFixed(0)}m`;
 }
 
 const MAP_NAME_DICT: Record<string, string> = {
-    Baltic_Main: "Erangel (Remastered)",
-    Chimera_Main: "Paramo",
-    Desert_Main: "Miramar",
-    DihorOtok_Main: "Vikendi",
-    Erangel_Main: "Erangel",
-    Heaven_Main: "Haven",
-    Kiki_Main: "Deston",
-    Range_Main: "Camp Jackal",
-    Savage_Main: "Sanhok",
-    Summerland_Main: "Karakin",
-    Tiger_Main: "Taego",
-    Neon_Main: "Rondo",
+  Baltic_Main: "Erangel (Remastered)",
+  Chimera_Main: "Paramo",
+  Desert_Main: "Miramar",
+  DihorOtok_Main: "Vikendi",
+  Erangel_Main: "Erangel",
+  Heaven_Main: "Haven",
+  Kiki_Main: "Deston",
+  Range_Main: "Camp Jackal",
+  Savage_Main: "Sanhok",
+  Summerland_Main: "Karakin",
+  Tiger_Main: "Taego",
+  Neon_Main: "Rondo",
 };
 
 function mapNameLabel(mapName?: string | null) {
-    if (!mapName) return "맵 정보 없음";
-    return MAP_NAME_DICT[mapName] ?? mapName;
+  if (!mapName) return "맵 정보 없음";
+  return MAP_NAME_DICT[mapName] ?? mapName;
 }
 
 export default function Profile() {
@@ -92,36 +92,36 @@ export default function Profile() {
   const [rankStats, setRankStats] = useState<RankStatsBundle | null>(null);
   const [seasonStats, setSeasonStats] = useState<SeasonStatsBundle | null>(null);
   const [matchHistory, setMatchHistory] = useState<MatchHistoryResponse | null>(null);
-    const [matchDetails, setMatchDetails] = useState<Record<string, MatchDetailResponse>>({});
-    const [matchDetailState, setMatchDetailState] = useState<LoadState>("idle");
-    const [matchDetailError, setMatchDetailError] = useState<string | null>(null);
-    const [matchLimit, setMatchLimit] = useState<number>(5);
-    const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
-    const [matchState, setMatchState] = useState<LoadState>("idle");
-    const [matchError, setMatchError] = useState<string | null>(null);
-    const [expandedMatchId, setExpandedMatchId] = useState<string | null>(null);
+  const [matchDetails, setMatchDetails] = useState<Record<string, MatchDetailResponse>>({});
+  const [matchDetailState, setMatchDetailState] = useState<LoadState>("idle");
+  const [matchDetailError, setMatchDetailError] = useState<string | null>(null);
+  const [matchLimit, setMatchLimit] = useState<number>(5);
+  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const [matchState, setMatchState] = useState<LoadState>("idle");
+  const [matchError, setMatchError] = useState<string | null>(null);
+  const [expandedMatchId, setExpandedMatchId] = useState<string | null>(null);
 
-    const fetchMatchDetails = async (ids: string[], accountId: string) => {
-        if (ids.length === 0) {
-            setMatchDetails({});
-            return;
-        }
-        setMatchDetailState("loading");
+  const fetchMatchDetails = async (ids: string[], accountId: string) => {
+    if (ids.length === 0) {
+      setMatchDetails({});
+      return;
+    }
+    setMatchDetailState("loading");
     setMatchDetailError(null);
     try {
-            const responses = await Promise.all(
-                ids.map((id) => fetchMatchDetail(platform ?? "kakao", id, accountId).catch(() => null)),
-            );
-            const mapped: Record<string, MatchDetailResponse> = {};
-            ids.forEach((id, idx) => {
-                if (responses[idx]) mapped[id] = responses[idx] as MatchDetailResponse;
-            });
-            setMatchDetails((prev) => ({ ...prev, ...mapped }));
-            setMatchDetailState("success");
-        } catch (err) {
-            setMatchDetailError("매치 상세 정보를 불러오지 못했습니다.");
-            setMatchDetailState("error");
-        }
+      const responses = await Promise.all(
+        ids.map((id) => fetchMatchDetail(platform ?? "kakao", id, accountId).catch(() => null)),
+      );
+      const mapped: Record<string, MatchDetailResponse> = {};
+      ids.forEach((id, idx) => {
+        if (responses[idx]) mapped[id] = responses[idx] as MatchDetailResponse;
+      });
+      setMatchDetails((prev) => ({ ...prev, ...mapped }));
+      setMatchDetailState("success");
+    } catch (err) {
+      setMatchDetailError("매치 상세 정보를 불러오지 못했습니다.");
+      setMatchDetailState("error");
+    }
   };
 
   const loadAll = async (selectedPlatform: Platform, nickname: string) => {
@@ -134,14 +134,14 @@ export default function Profile() {
     setSeasonError(null);
     setMatchError(null);
     setMatchDetailError(null);
-        setPlayer(null);
-        setRankStats(null);
-        setSeasonStats(null);
-        setMatchHistory(null);
-        setMatchDetails({});
-        setMatchLimit(5);
+    setPlayer(null);
+    setRankStats(null);
+    setSeasonStats(null);
+    setMatchHistory(null);
+    setMatchDetails({});
+    setMatchLimit(5);
 
-        let loadedPlayer: PlayerResponse | null = null;
+    let loadedPlayer: PlayerResponse | null = null;
 
     try {
       const playerData = await fetchPlayer(selectedPlatform, nickname);
@@ -158,66 +158,66 @@ export default function Profile() {
       return;
     }
 
-        try {
-            const rankData = await fetchRankStats(selectedPlatform, nickname, false);
-            setRankStats(rankData);
-            setRankState("success");
-        } catch (err) {
-            setRankError("랭크 정보를 불러오지 못했습니다.");
-            setRankState("error");
-        }
+    try {
+      const rankData = await fetchRankStats(selectedPlatform, nickname, false);
+      setRankStats(rankData);
+      setRankState("success");
+    } catch (err) {
+      setRankError("랭크 정보를 불러오지 못했습니다.");
+      setRankState("error");
+    }
 
-        let seasonDataLocal: SeasonStatsBundle | null = null;
-        try {
-            const seasonData = await fetchSeasonStats(selectedPlatform, nickname, false);
-            setSeasonStats(seasonData);
-            setSeasonState("success");
-            seasonDataLocal = seasonData;
-        } catch (err) {
-            setSeasonError("일반 전적 정보를 불러오지 못했습니다.");
-            setSeasonState("error");
-        }
+    let seasonDataLocal: SeasonStatsBundle | null = null;
+    try {
+      const seasonData = await fetchSeasonStats(selectedPlatform, nickname, false);
+      setSeasonStats(seasonData);
+      setSeasonState("success");
+      seasonDataLocal = seasonData;
+    } catch (err) {
+      setSeasonError("일반 전적 정보를 불러오지 못했습니다.");
+      setSeasonState("error");
+    }
 
-        try {
-            const matches = await fetchMatchHistory(loadedPlayer.accountId);
-            setMatchHistory(matches);
-            setMatchState("success");
-            const initialIds = matches.matchIds.slice(0, 5);
-            fetchMatchDetails(initialIds, loadedPlayer.accountId);
-        } catch (err) {
-            setMatchError("매치 기록을 불러오지 못했습니다.");
-            setMatchState("error");
-        }
+    try {
+      const matches = await fetchMatchHistory(loadedPlayer.accountId);
+      setMatchHistory(matches);
+      setMatchState("success");
+      const initialIds = matches.matchIds.slice(0, 5);
+      fetchMatchDetails(initialIds, loadedPlayer.accountId);
+    } catch (err) {
+      setMatchError("매치 기록을 불러오지 못했습니다.");
+      setMatchState("error");
+    }
 
-        // 시즌 전적이 모두 비었으면 한 번만 갱신 시도
-        const isSeasonEmpty = (bundle: SeasonStatsBundle | null) =>
-            !bundle?.squad && !bundle?.duo && !bundle?.solo;
-        if (isSeasonEmpty(seasonDataLocal)) {
-            try {
-                const refreshed = await refreshHistory(selectedPlatform, loadedPlayer.accountId, nickname);
-                if (refreshed.rankStatsBundle) {
-                    setRankStats(refreshed.rankStatsBundle);
-                    setRankState("success");
-                }
-                if (refreshed.seasonStatsBundle) {
-                    setSeasonStats(refreshed.seasonStatsBundle);
-                    setSeasonState("success");
-                }
-                if (refreshed.matchResponse) {
-                    setMatchHistory(refreshed.matchResponse);
-                    setMatchDetails({});
-                    setMatchLimit(5);
-                    fetchMatchDetails(refreshed.matchResponse.matchIds.slice(0, 5), loadedPlayer.accountId);
-                    setMatchState("success");
-                }
-            } catch (err) {
-                // 이미 한 번 기본 요청을 했으므로 추가 에러는 노트만 남김
-                setSeasonError((prev) => prev ?? "일반 전적 정보를 갱신하지 못했습니다.");
-            }
+    // 시즌 전적이 모두 비었으면 한 번만 갱신 시도
+    const isSeasonEmpty = (bundle: SeasonStatsBundle | null) =>
+      !bundle?.squad && !bundle?.duo && !bundle?.solo;
+    if (isSeasonEmpty(seasonDataLocal)) {
+      try {
+        const refreshed = await refreshHistory(selectedPlatform, loadedPlayer.accountId, nickname);
+        if (refreshed.rankStatsBundle) {
+          setRankStats(refreshed.rankStatsBundle);
+          setRankState("success");
         }
+        if (refreshed.seasonStatsBundle) {
+          setSeasonStats(refreshed.seasonStatsBundle);
+          setSeasonState("success");
+        }
+        if (refreshed.matchResponse) {
+          setMatchHistory(refreshed.matchResponse);
+          setMatchDetails({});
+          setMatchLimit(5);
+          fetchMatchDetails(refreshed.matchResponse.matchIds.slice(0, 5), loadedPlayer.accountId);
+          setMatchState("success");
+        }
+      } catch (err) {
+        // 이미 한 번 기본 요청을 했으므로 추가 에러는 노트만 남김
+        setSeasonError((prev) => prev ?? "일반 전적 정보를 갱신하지 못했습니다.");
+      }
+    }
 
-        setLastUpdated(new Date());
-    };
+    setLastUpdated(new Date());
+  };
 
   const lastKeyRef = useRef<string | null>(null);
 
@@ -242,38 +242,38 @@ export default function Profile() {
     return { solo, duo, squad };
   }, [seasonStats]);
 
-    const formattedUpdatedAt = useMemo(() => {
-        if (!lastUpdated) return "갱신 대기";
-        return `${lastUpdated.toLocaleDateString()} ${lastUpdated.toLocaleTimeString()}`;
-    }, [lastUpdated]);
+  const formattedUpdatedAt = useMemo(() => {
+    if (!lastUpdated) return "갱신 대기";
+    return `${lastUpdated.toLocaleDateString()} ${lastUpdated.toLocaleTimeString()}`;
+  }, [lastUpdated]);
 
-    const matchList = useMemo(() => {
-        return (matchHistory?.matchIds ?? []).slice(0, matchLimit);
-    }, [matchHistory, matchLimit]);
+  const matchList = useMemo(() => {
+    return (matchHistory?.matchIds ?? []).slice(0, matchLimit);
+  }, [matchHistory, matchLimit]);
 
-    const handleRefresh = async () => {
-        if (!platform || !name || !player?.accountId) return;
-        setRankState("loading");
-        setSeasonState("loading");
-        setMatchState("loading");
+  const handleRefresh = async () => {
+    if (!platform || !name || !player?.accountId) return;
+    setRankState("loading");
+    setSeasonState("loading");
+    setMatchState("loading");
     setRankError(null);
     setSeasonError(null);
     setMatchError(null);
     setMatchDetailError(null);
     try {
-            const refreshed = await refreshHistory(platform, player.accountId, name);
-            setRankStats(refreshed.rankStatsBundle);
-            setSeasonStats(refreshed.seasonStatsBundle);
-            if (refreshed.matchResponse) {
-                setMatchHistory(refreshed.matchResponse);
-                setMatchDetails({});
-                setMatchLimit(5);
-                fetchMatchDetails(refreshed.matchResponse.matchIds.slice(0, 5), player.accountId);
-            }
-            setRankState("success");
-            setSeasonState("success");
-            setMatchState("success");
-        } catch (err) {
+      const refreshed = await refreshHistory(platform, player.accountId, name);
+      setRankStats(refreshed.rankStatsBundle);
+      setSeasonStats(refreshed.seasonStatsBundle);
+      if (refreshed.matchResponse) {
+        setMatchHistory(refreshed.matchResponse);
+        setMatchDetails({});
+        setMatchLimit(5);
+        fetchMatchDetails(refreshed.matchResponse.matchIds.slice(0, 5), player.accountId);
+      }
+      setRankState("success");
+      setSeasonState("success");
+      setMatchState("success");
+    } catch (err) {
       setRankError("랭크 정보를 갱신하지 못했습니다.");
       setSeasonError("일반 전적 정보를 갱신하지 못했습니다.");
       setRankState("error");
@@ -281,22 +281,22 @@ export default function Profile() {
       setMatchError("매치 기록을 갱신하지 못했습니다.");
       setMatchState("error");
       setMatchDetailError("매치 상세 정보를 갱신하지 못했습니다.");
-            setMatchDetailState("error");
-        }
+      setMatchDetailState("error");
+    }
 
-        
-        setLastUpdated(new Date());
-    };
 
-    const handleLoadMoreMatches = () => {
-        if (!matchHistory || !player?.accountId) return;
-        const newLimit = matchLimit + 5;
-        const idsToFetch = matchHistory.matchIds.slice(matchLimit, newLimit);
-        setMatchLimit(newLimit);
-        if (idsToFetch.length > 0) {
-            fetchMatchDetails(idsToFetch, player.accountId);
-        }
-    };
+    setLastUpdated(new Date());
+  };
+
+  const handleLoadMoreMatches = () => {
+    if (!matchHistory || !player?.accountId) return;
+    const newLimit = matchLimit + 5;
+    const idsToFetch = matchHistory.matchIds.slice(matchLimit, newLimit);
+    setMatchLimit(newLimit);
+    if (idsToFetch.length > 0) {
+      fetchMatchDetails(idsToFetch, player.accountId);
+    }
+  };
 
   const renderRankCard = (mode: "duo" | "squad") => {
     const data = rankMeta[mode];
@@ -305,8 +305,8 @@ export default function Profile() {
     const subTier = data?.subTier;
     const rp = data?.currentRankPoint;
     // 정식 배지 파일은 public/Insignias에 Tier/SubTier가 대소문자 포함 그대로 들어있음
-        const iconName = subTier ? `${tier}-${subTier}` : tier;
-        const iconSrc = `/PUBG/Insignias/${iconName}.png`;
+    const iconName = subTier ? `${tier}-${subTier}` : tier;
+    const iconSrc = `/PUBG/Insignias/${iconName}.png`;
 
     const entries: StatEntry[] = [
       { label: "KDA", value: formatNumber(data?.kda, 2) },
@@ -469,47 +469,47 @@ export default function Profile() {
                       <div className="match-row__left">
                         <div className="match-row__main">
                           <div className="match-row__mode">
-                                                    {detail?.gameMode ?? "게임 모드 불명"} · {mapNameLabel(detail?.mapName)}
+                            {detail?.gameMode ?? "게임 모드 불명"} · {mapNameLabel(detail?.mapName)}
                           </div>
                           <div className="match-row__meta">
                             <span>{detail?.createdAt ? new Date(detail.createdAt).toLocaleString() : "—"}</span>
                           </div>
                         </div>
                         <div className="match-row__actions">
-                        <button
-                          className="match-row__toggle"
-                          onClick={() => setExpandedMatchId(isExpanded ? null : id)}
-                        >
-                          {isExpanded ? "접기" : "상세"}
-                        </button>
-                      </div>
+                          <button
+                            className="match-row__toggle"
+                            onClick={() => setExpandedMatchId(isExpanded ? null : id)}
+                          >
+                            {isExpanded ? "접기" : "상세"}
+                          </button>
+                        </div>
                       </div>
                       <div className="match-row__details">
-                          <div className="match-row__stat">
-                            <div className="label">킬</div>
-                            <div className="value">{stats?.kills ?? "—"}</div>
-                          </div>
-                          <div className="match-row__stat">
-                            <div className="label">딜량</div>
-                            <div className="value">{formatNumber(stats?.damageDealt, 0)}</div>
-                          </div>
-                          <div className="match-row__stat">
-                            <div className="label">DBNOs</div>
-                            <div className="value">{stats?.DBNOs ?? "—"}</div>
-                          </div>
-                          <div className="match-row__stat">
-                            <div className="label">이동 거리</div>
-                            <div className="value">{formatDistance(travel)}</div>
-                          </div>
-                          <div className="match-row__stat">
-                            <div className="label">생존 시간</div>
-                            <div className="value">{formatSurvival(stats?.timeSurvived)}</div>
-                          </div>
-                          <div className="match-row__stat">
-                            <div className="label">팀원</div>
-                            <div className="value">{detail?.roster?.participantIds?.length ?? "—"}</div>
-                          </div>
+                        <div className="match-row__stat">
+                          <div className="label">킬</div>
+                          <div className="value">{stats?.kills ?? "—"}</div>
                         </div>
+                        <div className="match-row__stat">
+                          <div className="label">딜량</div>
+                          <div className="value">{formatNumber(stats?.damageDealt, 0)}</div>
+                        </div>
+                        <div className="match-row__stat">
+                          <div className="label">DBNOs</div>
+                          <div className="value">{stats?.DBNOs ?? "—"}</div>
+                        </div>
+                        <div className="match-row__stat">
+                          <div className="label">이동 거리</div>
+                          <div className="value">{formatDistance(travel)}</div>
+                        </div>
+                        <div className="match-row__stat">
+                          <div className="label">생존 시간</div>
+                          <div className="value">{formatSurvival(stats?.timeSurvived)}</div>
+                        </div>
+                        <div className="match-row__stat">
+                          <div className="label">팀 순위</div>
+                          <div className="value">#{detail?.roster?.rank ?? "—"}</div>
+                        </div>
+                      </div>
                       {isExpanded && stats && (
                         <div className="match-row__details">
                           <div className="match-row__stat">
@@ -545,14 +545,14 @@ export default function Profile() {
                 })}
               </div>
             )}
-                    </div>
-                    {matchHistory && matchLimit < matchHistory.matchIds.length && (
-                        <button className="match-row__more" onClick={handleLoadMoreMatches} disabled={matchDetailState === "loading"}>
-                            매치 정보 더 보기
-                        </button>
-                    )}
-                </section>
-            </div>
-        </main>
-    );
+          </div>
+          {matchHistory && matchLimit < matchHistory.matchIds.length && (
+            <button className="match-row__more" onClick={handleLoadMoreMatches} disabled={matchDetailState === "loading"}>
+              매치 정보 더 보기
+            </button>
+          )}
+        </section>
+      </div>
+    </main>
+  );
 }
