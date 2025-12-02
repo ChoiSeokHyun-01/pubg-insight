@@ -1,31 +1,160 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import MapProvider from "../components/map/MapProvider";
+import MapController from "../components/map/MapController";
+import MapView from "../components/map/MapView";
+import { useMapView } from "../components/map/useMapView";
 import "../styles/pin-editor.css";
 
 type Pin = {
     id: string;
     type: string;
-    x: number; // px relative to image natural width
-    y: number; // px relative to image natural height
+    x: number; // world coordinate (0~worldSize)
+    y: number;
 };
 
-const DEFAULT_WORLD_SIZE = 16384;
 const DEFAULT_TILE_SIZE = 256;
 
+function PinOverlay({
+    pins,
+    setPins,
+    pinType,
+}: {
+    pins: Pin[];
+    setPins: (fn: (prev: Pin[]) => Pin[]) => void;
+    pinType: string;
+}) {
+    const { viewport, scale, worldSize, setZoom, setCenter, size, zoom } = useMapView();
+    const overlayRef = useRef<HTMLDivElement | null>(null);
+    const draggingId = useRef<string | null>(null);
+
+    const clampWorld = (v: number) => Math.max(0, Math.min(worldSize, v));
+
+    const screenToWorld = (clientX: number, clientY: number) => {
+        if (!overlayRef.current) return null;
+        const rect = overlayRef.current.getBoundingClientRect();
+        const px = clientX - rect.left;
+        const py = clientY - rect.top;
+        const wx = viewport.left + px / scale;
+        const wy = viewport.top + py / scale;
+        return { x: clampWorld(wx), y: clampWorld(wy) };
+    };
+
+    const addPinAt = (clientX: number, clientY: number) => {
+        const w = screenToWorld(clientX, clientY);
+        if (!w) return;
+        setPins((prev) => [
+            ...prev,
+            {
+                id: `pin-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`,
+                type: pinType,
+                x: w.x,
+                y: w.y,
+            },
+        ]);
+    };
+
+    const startDrag = (id: string, e: React.MouseEvent) => {
+        e.stopPropagation();
+        draggingId.current = id;
+        window.addEventListener("mousemove", onMove);
+        window.addEventListener("mouseup", onUp);
+    };
+
+    const onMove = (e: MouseEvent) => {
+        if (!draggingId.current) return;
+        const w = screenToWorld(e.clientX, e.clientY);
+        if (!w) return;
+        setPins((prev) =>
+            prev.map((p) => (p.id === draggingId.current ? { ...p, x: w.x, y: w.y } : p)),
+        );
+    };
+
+    const onUp = () => {
+        draggingId.current = null;
+        window.removeEventListener("mousemove", onMove);
+        window.removeEventListener("mouseup", onUp);
+    };
+
+    useEffect(() => {
+        return () => {
+            window.removeEventListener("mousemove", onMove);
+            window.removeEventListener("mouseup", onUp);
+        };
+    }, []);
+
+    const toScreen = (pin: Pin) => {
+        const sx = (pin.x - viewport.left) * scale;
+        const sy = (pin.y - viewport.top) * scale;
+        return { sx, sy };
+    };
+
+    const handleWheel = (e: React.WheelEvent) => {
+        e.preventDefault();
+        if (!overlayRef.current) return;
+        const rect = overlayRef.current.getBoundingClientRect();
+        const px = e.clientX - rect.left;
+        const py = e.clientY - rect.top;
+        const delta = -e.deltaY / 500;
+        setZoom(zoom + delta);
+        // center stays consistent due to MapController logic; optionally recentre here if needed
+    };
+
+    const handleContextPan = (e: React.MouseEvent) => {
+        if (e.button !== 2) return;
+        e.preventDefault();
+        const rect = overlayRef.current?.getBoundingClientRect();
+        if (!rect) return;
+        const startX = e.clientX;
+        const startY = e.clientY;
+        const startCenter = { ...useMapView().center }; // not ideal to call hook; avoid
+    };
+
+    const handlePinClick = (id: string, e: React.MouseEvent) => {
+        e.stopPropagation();
+        if (e.ctrlKey) {
+            setPins((prev) => prev.filter((p) => p.id !== id));
+        }
+    };
+
+    return (
+        <div
+            ref={overlayRef}
+            className="pin-editor__overlay"
+            onWheel={handleWheel}
+            onContextMenu={(e) => e.preventDefault()}
+            onPointerDownCapture={(e) => {
+                // 좌클릭으로 빈 공간에 핀 추가. 캡처 단계에서 컨트롤러로 전달되지 않도록 중단.
+                if (e.button === 0 && !e.ctrlKey) {
+                    e.stopPropagation();
+                    e.preventDefault();
+                    addPinAt(e.clientX, e.clientY);
+                }
+            }}
+        >
+            {pins.map((p) => {
+                const { sx, sy } = toScreen(p);
+                // skip rendering if far outside viewport for perf
+                if (sx < -50 || sy < -50 || sx > size.w + 50 || sy > size.h + 50) return null;
+                return (
+                    <div
+                        key={p.id}
+                        className="pin-editor__pin"
+                        style={{ left: `${sx}px`, top: `${sy}px` }}
+                        onMouseDown={(e) => startDrag(p.id, e)}
+                        onClick={(e) => handlePinClick(p.id, e)}
+                        title={`${p.type}`}
+                    />
+                );
+            })}
+        </div>
+    );
+}
+
 export default function PinEditorPage() {
-    const [bgUrl, setBgUrl] = useState<string>("/PUBG/map/erangel/0/0.png");
-    const [naturalSize, setNaturalSize] = useState<{ w: number; h: number }>({ w: 750, h: 740 });
+    const [mapName, setMapName] = useState<string>("erangel");
     const [pins, setPins] = useState<Pin[]>([]);
     const [pinType, setPinType] = useState<string>("비밀의 방");
-    const [worldSize, setWorldSize] = useState<number>(DEFAULT_WORLD_SIZE);
-    const [scale, setScale] = useState<number>(1);
-    const [offset, setOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
-    const [isPanning, setIsPanning] = useState<boolean>(false);
-    const panStart = useRef<{ x: number; y: number; ox: number; oy: number } | null>(null);
     const [hideHeader, setHideHeader] = useState<boolean>(false);
-    const mapRef = useRef<HTMLDivElement | null>(null);
-    const draggingId = useRef<string | null>(null);
-    const draggingMove = useRef<boolean>(false);
-    const suppressClick = useRef<boolean>(false);
 
     useEffect(() => {
         if (hideHeader) {
@@ -38,88 +167,19 @@ export default function PinEditorPage() {
         };
     }, [hideHeader]);
 
-    useEffect(() => {
-        const handler = (e: MouseEvent) => {
-            if (isPanning && panStart.current) {
-                const dx = e.clientX - panStart.current.x;
-                const dy = e.clientY - panStart.current.y;
-                setOffset({ x: panStart.current.ox + dx, y: panStart.current.oy + dy });
-                return;
-            }
-            if (!draggingId.current || !mapRef.current) return;
-            draggingMove.current = true;
-            const rect = mapRef.current.getBoundingClientRect();
-            const x = Math.max(0, Math.min((e.clientX - rect.left - offset.x) / scale, rect.width / scale));
-            const y = Math.max(0, Math.min((e.clientY - rect.top - offset.y) / scale, rect.height / scale));
-            setPins((prev) =>
-                prev.map((p) =>
-                    p.id === draggingId.current
-                        ? {
-                              ...p,
-                              x: (x / rect.width) * naturalSize.w,
-                              y: (y / rect.height) * naturalSize.h,
-                          }
-                        : p,
-                ),
-            );
-        };
-        const upHandler = () => {
-            if (draggingMove.current) {
-                suppressClick.current = true;
-            }
-            if (isPanning) {
-                suppressClick.current = true;
-            }
-            draggingMove.current = false;
-            draggingId.current = null;
-            setIsPanning(false);
-            panStart.current = null;
-        };
-        window.addEventListener("mousemove", handler);
-        window.addEventListener("mouseup", upHandler);
-        return () => {
-            window.removeEventListener("mousemove", handler);
-            window.removeEventListener("mouseup", upHandler);
-        };
-    }, [naturalSize, isPanning, offset, scale]);
-
-    const addPin = (e: React.MouseEvent) => {
-        if (!mapRef.current) return;
-        if (suppressClick.current) {
-            suppressClick.current = false;
-            return;
-        }
-        const rect = mapRef.current.getBoundingClientRect();
-        const x = Math.max(0, Math.min((e.clientX - rect.left - offset.x) / scale, rect.width / scale));
-        const y = Math.max(0, Math.min((e.clientY - rect.top - offset.y) / scale, rect.height / scale));
-        const px = (x / rect.width) * naturalSize.w;
-        const py = (y / rect.height) * naturalSize.h;
-        const id = `pin-${Date.now()}-${Math.random().toString(36).slice(2, 6)}`;
-        setPins((prev) => [...prev, { id, type: pinType, x: px, y: py }]);
-    };
-
-    const startDrag = (id: string, e: React.MouseEvent) => {
-        e.stopPropagation();
-        draggingId.current = id;
-    };
-
-    const removePin = (id: string) => {
-        setPins((prev) => prev.filter((p) => p.id !== id));
-    };
-
-    const downloadJson = () => {
+    const downloadJson = (worldSize: number) => {
         const pinsJson = pins.map((p, idx) => ({
             id: p.id || `pin-${idx}`,
             type: p.type,
-            x: Math.round((p.x / naturalSize.w) * worldSize),
-            y: Math.round((p.y / naturalSize.h) * worldSize),
+            x: Math.round(p.x),
+            y: Math.round(p.y),
             label: p.type,
             anchor: "bottom",
         }));
         const json = JSON.stringify(
             {
                 version: "1",
-                map: "custom",
+                map: mapName,
                 ref: { zBase: 6, worldSize, tileSize: DEFAULT_TILE_SIZE },
                 icons: { [pinType]: "/icons/secret-room.png" },
                 pins: pinsJson,
@@ -136,30 +196,21 @@ export default function PinEditorPage() {
         URL.revokeObjectURL(url);
     };
 
+    const worldSizeForDownload = useMemo(() => {
+        // best-effort: use erangel size 16384 default
+        return 16384;
+    }, []);
+
     return (
         <main className={`pin-editor${hideHeader ? " pin-editor--fullscreen" : ""}`}>
             <div className="pin-editor__panel">
                 <div className="pin-editor__field">
-                    <label>배경 이미지 URL</label>
-                    <input
-                        type="text"
-                        value={bgUrl}
-                        onChange={(e) => setBgUrl(e.target.value)}
-                        placeholder="/PUBG/map/erangel/0/0.png"
-                    />
+                    <label>맵 이름</label>
+                    <input type="text" value={mapName} onChange={(e) => setMapName(e.target.value)} />
                 </div>
                 <div className="pin-editor__field pin-editor__field--inline">
                     <label>핀 타입</label>
                     <input type="text" value={pinType} onChange={(e) => setPinType(e.target.value)} />
-                </div>
-                <div className="pin-editor__field pin-editor__field--inline">
-                    <label>월드 크기</label>
-                    <input
-                        type="number"
-                        min={1}
-                        value={worldSize}
-                        onChange={(e) => setWorldSize(Number(e.target.value) || DEFAULT_WORLD_SIZE)}
-                    />
                 </div>
                 <div className="pin-editor__actions">
                     <button type="button" onClick={() => setPins([])}>
@@ -168,9 +219,7 @@ export default function PinEditorPage() {
                     <button type="button" onClick={() => setHideHeader((v) => !v)}>
                         헤더 {hideHeader ? "표시" : "숨기기"}
                     </button>
-                    <button type="button" onClick={() => setScale((s) => Math.min(3, s + 0.1))}>확대 +</button>
-                    <button type="button" onClick={() => setScale((s) => Math.max(0.2, s - 0.1))}>축소 -</button>
-                    <button type="button" onClick={downloadJson}>
+                    <button type="button" onClick={() => downloadJson(worldSizeForDownload)}>
                         layers.json 다운로드
                     </button>
                 </div>
@@ -179,81 +228,20 @@ export default function PinEditorPage() {
                         <div key={p.id} className="pin-editor__row">
                             <span>{p.type}</span>
                             <span>
-                                x:{Math.round((p.x / naturalSize.w) * worldSize)} / y:
-                                {Math.round((p.y / naturalSize.h) * worldSize)}
+                                x:{Math.round(p.x)} / y:{Math.round(p.y)}
                             </span>
-                            <button onClick={() => removePin(p.id)}>삭제</button>
+                            <button onClick={() => setPins((prev) => prev.filter((x) => x.id !== p.id))}>삭제</button>
                         </div>
                     ))}
                 </div>
             </div>
-            <div
-                className="pin-editor__canvas"
-                ref={mapRef}
-                onClick={(e) => {
-                    if (e.ctrlKey) return; // ctrl+click은 삭제용으로 예약
-                    addPin(e);
-                }}
-                onWheel={(e) => {
-                    e.preventDefault();
-                    if (!mapRef.current) return;
-                    const rect = mapRef.current.getBoundingClientRect();
-                    const worldNormX = (e.clientX - rect.left - offset.x) / (scale * rect.width);
-                    const worldNormY = (e.clientY - rect.top - offset.y) / (scale * rect.height);
-                    const delta = e.deltaY > 0 ? -0.1 : 0.1;
-                    const nextScale = Math.min(3, Math.max(0.2, scale + delta));
-                    const nextOffsetX = e.clientX - rect.left - worldNormX * nextScale * rect.width;
-                    const nextOffsetY = e.clientY - rect.top - worldNormY * nextScale * rect.height;
-                    setScale(nextScale);
-                    setOffset({ x: nextOffsetX, y: nextOffsetY });
-                }}
-                onMouseDown={(e) => {
-                    if (e.button === 2) {
-                        e.preventDefault();
-                        setIsPanning(true);
-                        panStart.current = { x: e.clientX, y: e.clientY, ox: offset.x, oy: offset.y };
-                    }
-                }}
-                onContextMenu={(e) => e.preventDefault()}
-                onMouseLeave={() => {
-                    setIsPanning(false);
-                    panStart.current = null;
-                }}
-            >
-                <div
-                    className="pin-editor__canvas-inner"
-                    style={{ transform: `translate(${offset.x}px, ${offset.y}px) scale(${scale})`, transformOrigin: "0 0" }}
-                >
-                    <img
-                        src={bgUrl}
-                        alt="map"
-                        className="pin-editor__img"
-                        draggable={false}
-                        onLoad={(e) =>
-                            setNaturalSize({ w: e.currentTarget.naturalWidth, h: e.currentTarget.naturalHeight })
-                        }
-                    />
-                    {pins.map((p) => {
-                        const left = (p.x / naturalSize.w) * 100;
-                        const top = (p.y / naturalSize.h) * 100;
-                        return (
-                            <div
-                                key={p.id}
-                                className="pin-editor__pin"
-                                style={{ left: `${left}%`, top: `${top}%` }}
-                                onMouseDown={(e) => startDrag(p.id, e)}
-                                onClick={(e) => {
-                                    if (e.ctrlKey) {
-                                        e.stopPropagation();
-                                        removePin(p.id);
-                                    }
-                                }}
-                                title={`${p.type}`}
-                            />
-                        );
-                    })}
-                </div>
-            </div>
+
+            <MapProvider name={mapName} initialZoom={2}>
+                <MapController className="pin-editor__map-controller">
+                    <MapView />
+                    <PinOverlay pins={pins} setPins={setPins} pinType={pinType} />
+                </MapController>
+            </MapProvider>
         </main>
     );
 }

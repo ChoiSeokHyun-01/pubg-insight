@@ -1,7 +1,15 @@
 .env*
+/.env
+
+# virtual environments
+.venv/
 
 # Collector outputs and exports
 collector/out/
 collector/players/
 collector/*.json
 collector/*.jsonl
+
+# telemetry vehicle spawns outputs
+telemetry_vehicle_spawns/map/
+telemetry_vehicle_spawns/matches/

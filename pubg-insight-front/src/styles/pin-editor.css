@@ -142,7 +142,7 @@
   position: absolute;
   width: 16px;
   height: 16px;
-  background: #ff5353;
+  background: #ff535362;
   border: 2px solid #fff;
   border-radius: 50%;
   transform: translate(-50%, -50%);
@@ -152,6 +152,18 @@
 
 .pin-editor__pin:active {
   cursor: grabbing;
+}
+
+.pin-editor__map-controller {
+  position: relative;
+  width: 100%;
+  height: calc(100vh - 140px);
+}
+
+.pin-editor__overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: auto;
 }
 
 @media (max-width: 900px) {

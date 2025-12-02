@@ -38,6 +38,7 @@ export interface PinRecord {
   x: number;
   y: number;
   label?: string;
+  count?: number;
   anchor?: PinAnchor;
   minZoom?: number;
   maxZoom?: number;
@@ -214,7 +215,11 @@ export function PinLayer({
             type={pin.type}
             x={pin.px}
             y={pin.py}
-            label={pin.label}
+            label={
+              pin.count !== undefined
+                ? `${pin.label ?? pin.type} (${pin.count})`
+                : pin.label
+            }
             anchor={pin.anchor}
             color={pin.color}
             onClick={(event) => onPinClick?.(pin, event)}
