@@ -7,8 +7,8 @@ import "../../styles/header.css";
 const NAV_ITEMS = [
     { label: "메인", to: "/" },
     { label: "지도", to: "/maps" },
-    { label: "핀 에디터", to: "/pin-editor" },
-    { label: "데이터", to: "/data" },
+    // { label: "핀 에디터", to: "/pin-editor" },
+    // { label: "데이터", to: "/data" },
     // { label: "랭커", to: "/ranker" },
 ];
 

@@ -1,0 +1,1792 @@
+{
+  "version": "1",
+  "map": "miramar",
+  "ref": {
+    "zBase": 6,
+    "worldSize": 16384,
+    "tileSize": 256
+  },
+  "icons": {
+    "차량": "/icons/vehicle-ground.png",
+    "글라이더": "/icons/vehicle-glider.png",
+    "보트": "/icons/vehicle-boat.png"
+  },
+  "pins": [
+    {
+      "id": "miramar-차량-7616-1344",
+      "type": "차량",
+      "x": 7616,
+      "y": 1344,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 50
+    },
+    {
+      "id": "miramar-차량-9152-13536",
+      "type": "차량",
+      "x": 9152,
+      "y": 13536,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 15
+    },
+    {
+      "id": "miramar-차량-12864-11616",
+      "type": "차량",
+      "x": 12864,
+      "y": 11616,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-11776-9920",
+      "type": "차량",
+      "x": 11776,
+      "y": 9920,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-10016-7520",
+      "type": "차량",
+      "x": 10016,
+      "y": 7520,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-11680-1600",
+      "type": "차량",
+      "x": 11680,
+      "y": 1600,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 8
+    },
+    {
+      "id": "miramar-차량-8544-3808",
+      "type": "차량",
+      "x": 8544,
+      "y": 3808,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 13
+    },
+    {
+      "id": "miramar-차량-8480-3808",
+      "type": "차량",
+      "x": 8480,
+      "y": 3808,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-13920-3232",
+      "type": "차량",
+      "x": 13920,
+      "y": 3232,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-12448-9440",
+      "type": "차량",
+      "x": 12448,
+      "y": 9440,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-12448-9696",
+      "type": "차량",
+      "x": 12448,
+      "y": 9696,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-7744-8416",
+      "type": "차량",
+      "x": 7744,
+      "y": 8416,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-5728-9056",
+      "type": "차량",
+      "x": 5728,
+      "y": 9056,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-7232-7424",
+      "type": "차량",
+      "x": 7232,
+      "y": 7424,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-4192-8032",
+      "type": "차량",
+      "x": 4192,
+      "y": 8032,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 9
+    },
+    {
+      "id": "miramar-차량-5312-6720",
+      "type": "차량",
+      "x": 5312,
+      "y": 6720,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-2720-5568",
+      "type": "차량",
+      "x": 2720,
+      "y": 5568,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-12256-6464",
+      "type": "차량",
+      "x": 12256,
+      "y": 6464,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 11
+    },
+    {
+      "id": "miramar-차량-9280-1664",
+      "type": "차량",
+      "x": 9280,
+      "y": 1664,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-6464-4800",
+      "type": "차량",
+      "x": 6464,
+      "y": 4800,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-2560-14144",
+      "type": "차량",
+      "x": 2560,
+      "y": 14144,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 5
+    },
+    {
+      "id": "miramar-차량-2560-14112",
+      "type": "차량",
+      "x": 2560,
+      "y": 14112,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-9440-10784",
+      "type": "차량",
+      "x": 9440,
+      "y": 10784,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 9
+    },
+    {
+      "id": "miramar-차량-1952-6368",
+      "type": "차량",
+      "x": 1952,
+      "y": 6368,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-8832-5632",
+      "type": "차량",
+      "x": 8832,
+      "y": 5632,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-5632-4480",
+      "type": "차량",
+      "x": 5632,
+      "y": 4480,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-7584-1344",
+      "type": "차량",
+      "x": 7584,
+      "y": 1344,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-9312-10848",
+      "type": "차량",
+      "x": 9312,
+      "y": 10848,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-8000-11648",
+      "type": "차량",
+      "x": 8000,
+      "y": 11648,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-8000-13024",
+      "type": "차량",
+      "x": 8000,
+      "y": 13024,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 4
+    },
+    {
+      "id": "miramar-차량-6464-6912",
+      "type": "차량",
+      "x": 6464,
+      "y": 6912,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-8896-4672",
+      "type": "차량",
+      "x": 8896,
+      "y": 4672,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 9
+    },
+    {
+      "id": "miramar-차량-7264-13472",
+      "type": "차량",
+      "x": 7264,
+      "y": 13472,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-5472-10496",
+      "type": "차량",
+      "x": 5472,
+      "y": 10496,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 13
+    },
+    {
+      "id": "miramar-차량-7584-1280",
+      "type": "차량",
+      "x": 7584,
+      "y": 1280,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-11648-6400",
+      "type": "차량",
+      "x": 11648,
+      "y": 6400,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-5536-10496",
+      "type": "차량",
+      "x": 5536,
+      "y": 10496,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-10400-9696",
+      "type": "차량",
+      "x": 10400,
+      "y": 9696,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-10912-9984",
+      "type": "차량",
+      "x": 10912,
+      "y": 9984,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-10080-5024",
+      "type": "차량",
+      "x": 10080,
+      "y": 5024,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-10528-4032",
+      "type": "차량",
+      "x": 10528,
+      "y": 4032,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-9696-6048",
+      "type": "차량",
+      "x": 9696,
+      "y": 6048,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-11200-7872",
+      "type": "차량",
+      "x": 11200,
+      "y": 7872,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-7232-8480",
+      "type": "차량",
+      "x": 7232,
+      "y": 8480,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-7296-8480",
+      "type": "차량",
+      "x": 7296,
+      "y": 8480,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-10720-12096",
+      "type": "차량",
+      "x": 10720,
+      "y": 12096,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-9696-12832",
+      "type": "차량",
+      "x": 9696,
+      "y": 12832,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-2592-14112",
+      "type": "차량",
+      "x": 2592,
+      "y": 14112,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-11232-8256",
+      "type": "차량",
+      "x": 11232,
+      "y": 8256,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 5
+    },
+    {
+      "id": "miramar-차량-12832-10400",
+      "type": "차량",
+      "x": 12832,
+      "y": 10400,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-11168-7200",
+      "type": "차량",
+      "x": 11168,
+      "y": 7200,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 4
+    },
+    {
+      "id": "miramar-차량-13120-10144",
+      "type": "차량",
+      "x": 13120,
+      "y": 10144,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-12896-11200",
+      "type": "차량",
+      "x": 12896,
+      "y": 11200,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-2240-6080",
+      "type": "차량",
+      "x": 2240,
+      "y": 6080,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-7936-6048",
+      "type": "차량",
+      "x": 7936,
+      "y": 6048,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-2272-6656",
+      "type": "차량",
+      "x": 2272,
+      "y": 6656,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-6336-14752",
+      "type": "차량",
+      "x": 6336,
+      "y": 14752,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-5440-14656",
+      "type": "차량",
+      "x": 5440,
+      "y": 14656,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-5248-15200",
+      "type": "차량",
+      "x": 5248,
+      "y": 15200,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-7456-8992",
+      "type": "차량",
+      "x": 7456,
+      "y": 8992,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-6976-10304",
+      "type": "차량",
+      "x": 6976,
+      "y": 10304,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-7072-9920",
+      "type": "차량",
+      "x": 7072,
+      "y": 9920,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-6944-15168",
+      "type": "차량",
+      "x": 6944,
+      "y": 15168,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 4
+    },
+    {
+      "id": "miramar-차량-6240-9696",
+      "type": "차량",
+      "x": 6240,
+      "y": 9696,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-6752-11040",
+      "type": "차량",
+      "x": 6752,
+      "y": 11040,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 4
+    },
+    {
+      "id": "miramar-차량-6624-10752",
+      "type": "차량",
+      "x": 6624,
+      "y": 10752,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-2592-5280",
+      "type": "차량",
+      "x": 2592,
+      "y": 5280,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-5824-6432",
+      "type": "차량",
+      "x": 5824,
+      "y": 6432,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-10208-10752",
+      "type": "차량",
+      "x": 10208,
+      "y": 10752,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-1856-4448",
+      "type": "차량",
+      "x": 1856,
+      "y": 4448,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-4960-8544",
+      "type": "차량",
+      "x": 4960,
+      "y": 8544,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-5888-7360",
+      "type": "차량",
+      "x": 5888,
+      "y": 7360,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-4352-8160",
+      "type": "차량",
+      "x": 4352,
+      "y": 8160,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 4
+    },
+    {
+      "id": "miramar-차량-8288-4128",
+      "type": "차량",
+      "x": 8288,
+      "y": 4128,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-10720-7488",
+      "type": "차량",
+      "x": 10720,
+      "y": 7488,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-6624-2496",
+      "type": "차량",
+      "x": 6624,
+      "y": 2496,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-8832-12448",
+      "type": "차량",
+      "x": 8832,
+      "y": 12448,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-6464-6272",
+      "type": "차량",
+      "x": 6464,
+      "y": 6272,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-7968-2400",
+      "type": "차량",
+      "x": 7968,
+      "y": 2400,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-9952-6944",
+      "type": "차량",
+      "x": 9952,
+      "y": 6944,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-4320-5792",
+      "type": "차량",
+      "x": 4320,
+      "y": 5792,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-2560-6400",
+      "type": "차량",
+      "x": 2560,
+      "y": 6400,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-3616-5344",
+      "type": "차량",
+      "x": 3616,
+      "y": 5344,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-2784-5952",
+      "type": "차량",
+      "x": 2784,
+      "y": 5952,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-2240-6048",
+      "type": "차량",
+      "x": 2240,
+      "y": 6048,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-1984-10304",
+      "type": "차량",
+      "x": 1984,
+      "y": 10304,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-7488-1120",
+      "type": "차량",
+      "x": 7488,
+      "y": 1120,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-12960-9184",
+      "type": "차량",
+      "x": 12960,
+      "y": 9184,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-11808-7392",
+      "type": "차량",
+      "x": 11808,
+      "y": 7392,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-12736-7104",
+      "type": "차량",
+      "x": 12736,
+      "y": 7104,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-3488-7648",
+      "type": "차량",
+      "x": 3488,
+      "y": 7648,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-12160-7360",
+      "type": "차량",
+      "x": 12160,
+      "y": 7360,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 5
+    },
+    {
+      "id": "miramar-차량-12736-9024",
+      "type": "차량",
+      "x": 12736,
+      "y": 9024,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-5504-2912",
+      "type": "차량",
+      "x": 5504,
+      "y": 2912,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-5888-1824",
+      "type": "차량",
+      "x": 5888,
+      "y": 1824,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-13184-5344",
+      "type": "차량",
+      "x": 13184,
+      "y": 5344,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-7072-4736",
+      "type": "차량",
+      "x": 7072,
+      "y": 4736,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-6848-8512",
+      "type": "차량",
+      "x": 6848,
+      "y": 8512,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 4
+    },
+    {
+      "id": "miramar-차량-10432-9696",
+      "type": "차량",
+      "x": 10432,
+      "y": 9696,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-9568-8480",
+      "type": "차량",
+      "x": 9568,
+      "y": 8480,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 10
+    },
+    {
+      "id": "miramar-차량-9888-11424",
+      "type": "차량",
+      "x": 9888,
+      "y": 11424,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-10400-12928",
+      "type": "차량",
+      "x": 10400,
+      "y": 12928,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-11328-5792",
+      "type": "차량",
+      "x": 11328,
+      "y": 5792,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-6848-9152",
+      "type": "차량",
+      "x": 6848,
+      "y": 9152,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-6336-5536",
+      "type": "차량",
+      "x": 6336,
+      "y": 5536,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-7744-10432",
+      "type": "차량",
+      "x": 7744,
+      "y": 10432,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-4736-14496",
+      "type": "차량",
+      "x": 4736,
+      "y": 14496,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-9472-10080",
+      "type": "차량",
+      "x": 9472,
+      "y": 10080,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-3808-14176",
+      "type": "차량",
+      "x": 3808,
+      "y": 14176,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-3136-13792",
+      "type": "차량",
+      "x": 3136,
+      "y": 13792,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-8896-13472",
+      "type": "차량",
+      "x": 8896,
+      "y": 13472,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-9344-12448",
+      "type": "차량",
+      "x": 9344,
+      "y": 12448,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-9568-12640",
+      "type": "차량",
+      "x": 9568,
+      "y": 12640,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-13344-1952",
+      "type": "차량",
+      "x": 13344,
+      "y": 1952,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-11808-9632",
+      "type": "차량",
+      "x": 11808,
+      "y": 9632,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 5
+    },
+    {
+      "id": "miramar-차량-11392-5792",
+      "type": "차량",
+      "x": 11392,
+      "y": 5792,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-10240-4640",
+      "type": "차량",
+      "x": 10240,
+      "y": 4640,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-11936-5184",
+      "type": "차량",
+      "x": 11936,
+      "y": 5184,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-2304-3936",
+      "type": "차량",
+      "x": 2304,
+      "y": 3936,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-7616-14880",
+      "type": "차량",
+      "x": 7616,
+      "y": 14880,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-6944-6464",
+      "type": "차량",
+      "x": 6944,
+      "y": 6464,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-9888-9536",
+      "type": "차량",
+      "x": 9888,
+      "y": 9536,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 6
+    },
+    {
+      "id": "miramar-차량-3552-7840",
+      "type": "차량",
+      "x": 3552,
+      "y": 7840,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-5792-5280",
+      "type": "차량",
+      "x": 5792,
+      "y": 5280,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-6176-5152",
+      "type": "차량",
+      "x": 6176,
+      "y": 5152,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-11712-160",
+      "type": "차량",
+      "x": 11712,
+      "y": 160,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-7680-12000",
+      "type": "차량",
+      "x": 7680,
+      "y": 12000,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-13344-5408",
+      "type": "차량",
+      "x": 13344,
+      "y": 5408,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-8960-9440",
+      "type": "차량",
+      "x": 8960,
+      "y": 9440,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 4
+    },
+    {
+      "id": "miramar-차량-12512-12320",
+      "type": "차량",
+      "x": 12512,
+      "y": 12320,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-12480-10176",
+      "type": "차량",
+      "x": 12480,
+      "y": 10176,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-11584-6432",
+      "type": "차량",
+      "x": 11584,
+      "y": 6432,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-6240-7264",
+      "type": "차량",
+      "x": 6240,
+      "y": 7264,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-11360-5248",
+      "type": "차량",
+      "x": 11360,
+      "y": 5248,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-3040-3648",
+      "type": "차량",
+      "x": 3040,
+      "y": 3648,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-6400-9504",
+      "type": "차량",
+      "x": 6400,
+      "y": 9504,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-6208-8448",
+      "type": "차량",
+      "x": 6208,
+      "y": 8448,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-3200-6752",
+      "type": "차량",
+      "x": 3200,
+      "y": 6752,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-5088-2848",
+      "type": "차량",
+      "x": 5088,
+      "y": 2848,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-8288-7680",
+      "type": "차량",
+      "x": 8288,
+      "y": 7680,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-2528-4704",
+      "type": "차량",
+      "x": 2528,
+      "y": 4704,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-11328-10144",
+      "type": "차량",
+      "x": 11328,
+      "y": 10144,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 3
+    },
+    {
+      "id": "miramar-차량-4224-7968",
+      "type": "차량",
+      "x": 4224,
+      "y": 7968,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-11776-1696",
+      "type": "차량",
+      "x": 11776,
+      "y": 1696,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-9024-4704",
+      "type": "차량",
+      "x": 9024,
+      "y": 4704,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-8800-7840",
+      "type": "차량",
+      "x": 8800,
+      "y": 7840,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-8576-6848",
+      "type": "차량",
+      "x": 8576,
+      "y": 6848,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-10528-10784",
+      "type": "차량",
+      "x": 10528,
+      "y": 10784,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-10400-7616",
+      "type": "차량",
+      "x": 10400,
+      "y": 7616,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-6656-8064",
+      "type": "차량",
+      "x": 6656,
+      "y": 8064,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-4192-8224",
+      "type": "차량",
+      "x": 4192,
+      "y": 8224,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-3744-7968",
+      "type": "차량",
+      "x": 3744,
+      "y": 7968,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-3136-6144",
+      "type": "차량",
+      "x": 3136,
+      "y": 6144,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-9632-5216",
+      "type": "차량",
+      "x": 9632,
+      "y": 5216,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-9792-6656",
+      "type": "차량",
+      "x": 9792,
+      "y": 6656,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-2080-5184",
+      "type": "차량",
+      "x": 2080,
+      "y": 5184,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-4544-2976",
+      "type": "차량",
+      "x": 4544,
+      "y": 2976,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-4416-5024",
+      "type": "차량",
+      "x": 4416,
+      "y": 5024,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-6848-4448",
+      "type": "차량",
+      "x": 6848,
+      "y": 4448,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-8576-5600",
+      "type": "차량",
+      "x": 8576,
+      "y": 5600,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-5280-5536",
+      "type": "차량",
+      "x": 5280,
+      "y": 5536,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-6912-7616",
+      "type": "차량",
+      "x": 6912,
+      "y": 7616,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-7840-4544",
+      "type": "차량",
+      "x": 7840,
+      "y": 4544,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-4544-7360",
+      "type": "차량",
+      "x": 4544,
+      "y": 7360,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-7360-8672",
+      "type": "차량",
+      "x": 7360,
+      "y": 8672,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-10944-5280",
+      "type": "차량",
+      "x": 10944,
+      "y": 5280,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-10400-12896",
+      "type": "차량",
+      "x": 10400,
+      "y": 12896,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-3616-5824",
+      "type": "차량",
+      "x": 3616,
+      "y": 5824,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-10048-7264",
+      "type": "차량",
+      "x": 10048,
+      "y": 7264,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-7616-1440",
+      "type": "차량",
+      "x": 7616,
+      "y": 1440,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-13600-7232",
+      "type": "차량",
+      "x": 13600,
+      "y": 7232,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-9664-10720",
+      "type": "차량",
+      "x": 9664,
+      "y": 10720,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-2240-8960",
+      "type": "차량",
+      "x": 2240,
+      "y": 8960,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-7392-11776",
+      "type": "차량",
+      "x": 7392,
+      "y": 11776,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-2368-7232",
+      "type": "차량",
+      "x": 2368,
+      "y": 7232,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-12640-6304",
+      "type": "차량",
+      "x": 12640,
+      "y": 6304,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-2528-3264",
+      "type": "차량",
+      "x": 2528,
+      "y": 3264,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-12032-12736",
+      "type": "차량",
+      "x": 12032,
+      "y": 12736,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-5568-4192",
+      "type": "차량",
+      "x": 5568,
+      "y": 4192,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-6016-2464",
+      "type": "차량",
+      "x": 6016,
+      "y": 2464,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-13824-3392",
+      "type": "차량",
+      "x": 13824,
+      "y": 3392,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-13312-2368",
+      "type": "차량",
+      "x": 13312,
+      "y": 2368,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-12576-12256",
+      "type": "차량",
+      "x": 12576,
+      "y": 12256,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-9568-7968",
+      "type": "차량",
+      "x": 9568,
+      "y": 7968,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 2
+    },
+    {
+      "id": "miramar-차량-8992-4704",
+      "type": "차량",
+      "x": 8992,
+      "y": 4704,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-14336-6752",
+      "type": "차량",
+      "x": 14336,
+      "y": 6752,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-10912-8864",
+      "type": "차량",
+      "x": 10912,
+      "y": 8864,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-4448-11904",
+      "type": "차량",
+      "x": 4448,
+      "y": 11904,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-7456-6176",
+      "type": "차량",
+      "x": 7456,
+      "y": 6176,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-4000-8384",
+      "type": "차량",
+      "x": 4000,
+      "y": 8384,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-2432-4992",
+      "type": "차량",
+      "x": 2432,
+      "y": 4992,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-1952-4576",
+      "type": "차량",
+      "x": 1952,
+      "y": 4576,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-9632-13280",
+      "type": "차량",
+      "x": 9632,
+      "y": 13280,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-9408-6240",
+      "type": "차량",
+      "x": 9408,
+      "y": 6240,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-8512-10656",
+      "type": "차량",
+      "x": 8512,
+      "y": 10656,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-7584-1376",
+      "type": "차량",
+      "x": 7584,
+      "y": 1376,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    },
+    {
+      "id": "miramar-차량-7968-9568",
+      "type": "차량",
+      "x": 7968,
+      "y": 9568,
+      "label": "차량",
+      "anchor": "bottom",
+      "count": 1
+    }
+  ],
+  "meta": {
+    "matches": 59
+  }
+}
