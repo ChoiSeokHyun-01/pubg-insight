@@ -23,7 +23,7 @@ function PinOverlay({
     setPins: (fn: (prev: Pin[]) => Pin[]) => void;
     pinType: string;
 }) {
-    const { viewport, scale, worldSize, setZoom, setCenter, size, zoom } = useMapView();
+    const { viewport, scale, worldSize, setZoom, size, zoom } = useMapView();
     const overlayRef = useRef<HTMLDivElement | null>(null);
     const draggingId = useRef<string | null>(null);
 
@@ -90,23 +90,9 @@ function PinOverlay({
 
     const handleWheel = (e: React.WheelEvent) => {
         e.preventDefault();
-        if (!overlayRef.current) return;
-        const rect = overlayRef.current.getBoundingClientRect();
-        const px = e.clientX - rect.left;
-        const py = e.clientY - rect.top;
         const delta = -e.deltaY / 500;
         setZoom(zoom + delta);
         // center stays consistent due to MapController logic; optionally recentre here if needed
-    };
-
-    const handleContextPan = (e: React.MouseEvent) => {
-        if (e.button !== 2) return;
-        e.preventDefault();
-        const rect = overlayRef.current?.getBoundingClientRect();
-        if (!rect) return;
-        const startX = e.clientX;
-        const startY = e.clientY;
-        const startCenter = { ...useMapView().center }; // not ideal to call hook; avoid
     };
 
     const handlePinClick = (id: string, e: React.MouseEvent) => {
